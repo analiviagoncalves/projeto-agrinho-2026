@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta name="description" content="Agrinho 2026 - Tecnologia, Agricultura e Sustentabilidade unidas por um futuro melhor">
+    <meta name="description" content="Agrinho 2026 - Mapa Interativo da Fazenda Sustentável | Tecnologia, Agricultura e Sustentabilidade">
     <meta name="author" content="Agrinho 2026">
-    <title>Agrinho 2026 | Tecnologia + Agricultura + Sustentabilidade</title>
+    <title>Agrinho 2026 | Mapa Interativo da Fazenda Sustentável</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -18,373 +18,206 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FDFBF0;
-            color: #1F2A1F;
+            font-family: 'Inter', 'Poppins', sans-serif;
+            background: linear-gradient(145deg, #D9E8C6 0%, #C5DFA8 50%, #B2D48A 100%);
+            min-height: 100vh;
+            color: #1A3A1E;
             line-height: 1.5;
-            scroll-behavior: smooth;
         }
 
-        /* Variáveis de cor - tema Agrinho 2026 */
-        :root {
-            --verde-musgo: #1E3A1F;
-            --verde-agrinho: #4CAF50;
-            --verde-destaque: #7CB518;
-            --amarelo-colheita: #F5B042;
-            --terra-suave: #F5EEDC;
-            --cinza-sustentavel: #2E3B2C;
-            --sombra-leve: 0 15px 30px -12px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Header fixo com efeito vidro */
+        /* Header */
         .header {
-            background: rgba(30, 58, 31, 0.94);
+            background: rgba(30, 58, 30, 0.92);
             backdrop-filter: blur(10px);
             color: white;
             padding: 1rem 2rem;
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: 0.2s;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
-
         .logo {
             display: flex;
             align-items: center;
             gap: 12px;
             font-size: 1.6rem;
             font-weight: 800;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Poppins', sans-serif;
         }
-
-        .logo i {
-            font-size: 2rem;
-            color: var(--amarelo-colheita);
-        }
-
+        .logo i { font-size: 2rem; color: #FFD966; }
         .nav-links {
             display: flex;
             gap: 2rem;
             flex-wrap: wrap;
         }
-
         .nav-links a {
             color: white;
             text-decoration: none;
-            font-weight: 500;
-            transition: 0.2s;
-            border-bottom: 2px solid transparent;
-            padding-bottom: 4px;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            border-bottom-color: var(--amarelo-colheita);
-            color: #FFE0A3;
-        }
-
-        .btn {
-            display: inline-block;
-            background: var(--verde-agrinho);
-            color: white;
-            padding: 0.75rem 2rem;
-            border-radius: 40px;
             font-weight: 600;
-            text-decoration: none;
             transition: 0.2s;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            padding: 6px 12px;
+            border-radius: 30px;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            background: #FFD966;
+            color: #1A3A1E;
         }
 
-        .btn:hover {
-            background: var(--verde-destaque);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px -8px rgba(0,0,0,0.2);
-        }
-
-        /* Hero Section com imagem e overlay degradê */
-        .hero {
-            background: linear-gradient(115deg, rgba(28, 56, 28, 0.88) 0%, rgba(76, 175, 80, 0.75) 100%), url('https://images.pexels.com/photos/235725/pexels-photo-235725.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat;
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .hero-content {
-            max-width: 850px;
-            color: white;
-        }
-
-        .hero-content h1 {
-            font-size: 3.4rem;
-            font-family: 'Playfair Display', serif;
-            margin-bottom: 1.2rem;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
-        }
-
-        .hero-content p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            font-weight: 400;
-        }
-
-        /* Seções gerais */
-        .section {
-            padding: 5rem 2rem;
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 2.6rem;
-            font-family: 'Playfair Display', serif;
-            color: var(--verde-musgo);
-            text-align: center;
-            margin-bottom: 3rem;
+        /* Container principal do mapa */
+        .map-container {
+            max-width: 1300px;
+            margin: 2rem auto;
+            padding: 1rem;
             position: relative;
         }
-        .section-title:after {
-            content: '';
-            display: block;
-            width: 90px;
-            height: 4px;
-            background: var(--amarelo-colheita);
-            margin: 0.8rem auto 0;
-            border-radius: 4px;
-        }
 
-        /* Cards Grid */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-            gap: 2rem;
-            margin-top: 1rem;
-        }
-
-        .card {
-            background: white;
-            border-radius: 28px;
-            padding: 2rem 1.8rem;
-            box-shadow: var(--sombra-leve);
-            transition: all 0.25s ease;
-            border: 1px solid #E9EDD4;
+        .map-title {
             text-align: center;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.15);
-        }
-
-        .card i {
-            font-size: 3rem;
-            color: var(--verde-agrinho);
-            margin-bottom: 1.2rem;
-        }
-
-        .card h3 {
-            font-size: 1.7rem;
-            margin-bottom: 0.8rem;
-            color: var(--verde-musgo);
-        }
-
-        /* Estatísticas interativas */
-        .stats-container {
-            background: var(--terra-suave);
-            border-radius: 48px;
-            padding: 2.8rem 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            gap: 2rem;
-            text-align: center;
-            margin-top: 2.5rem;
-            box-shadow: var(--sombra-leve);
-        }
-
-        .stat-item {
-            flex: 1;
-            min-width: 150px;
-        }
-
-        .stat-number {
-            font-size: 3.2rem;
+            font-size: 2.2rem;
             font-weight: 800;
-            color: var(--verde-agrinho);
-            font-family: 'Playfair Display', serif;
+            color: #1A4D2A;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(255,255,200,0.6);
         }
-
-        /* Galeria de inovação */
-        .tech-showcase {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-            margin: 3rem 0;
-        }
-
-        .tech-card {
-            background: #fff;
-            border-radius: 28px;
-            overflow: hidden;
-            max-width: 340px;
-            box-shadow: var(--sombra-leve);
-            transition: 0.25s;
-        }
-
-        .tech-card:hover {
-            transform: scale(1.02);
-        }
-
-        .tech-card img {
-            width: 100%;
-            height: 210px;
-            object-fit: cover;
-        }
-
-        .tech-card .info {
-            padding: 1.6rem;
-        }
-
-        .info h4 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--verde-musgo);
-        }
-
-        /* Bloco de citação */
-        .quote-block {
-            background: linear-gradient(135deg, #1E3A1F 0%, #2B5E2F 100%);
-            color: white;
-            border-radius: 40px;
-            padding: 2.5rem;
+        .map-sub {
             text-align: center;
-            margin: 2rem 0;
+            color: #2D5A2C;
+            margin-bottom: 2rem;
+            font-weight: 500;
         }
 
-        /* Formulário de contato */
-        .form-container {
-            background: white;
+        /* Mapa ilustrado - área interativa SVG + zonas clicáveis */
+        .farm-map {
+            position: relative;
+            background: linear-gradient(135deg, #A9D46A, #7FB23E);
+            border-radius: 48px;
+            padding: 1.5rem;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.2), inset 0 1px 4px rgba(255,255,200,0.8);
+            border: 3px solid #FFE0A3;
+        }
+
+        .map-svg-container {
+            position: relative;
+            width: 100%;
+            background: #8FC154;
             border-radius: 32px;
-            padding: 2rem;
-            box-shadow: var(--sombra-leve);
-            max-width: 720px;
-            margin: 2rem auto 0;
+            overflow: hidden;
         }
 
-        .form-group {
-            margin-bottom: 1.3rem;
-        }
-
-        input, textarea {
+        svg {
             width: 100%;
-            padding: 14px 20px;
-            border: 1.5px solid #DDE5C0;
-            border-radius: 60px;
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            transition: 0.2s;
+            height: auto;
+            display: block;
+            cursor: pointer;
         }
 
-        textarea {
-            border-radius: 28px;
-            resize: vertical;
+        /* Áreas interativas do mapa */
+        .map-area {
+            cursor: pointer;
+            transition: filter 0.2s, stroke-width 0.2s;
+        }
+        .map-area:hover {
+            filter: brightness(1.05);
+            stroke: #FFD966;
+            stroke-width: 3;
         }
 
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--verde-agrinho);
-            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
-        }
-
-        .btn-form {
-            background: var(--verde-musgo);
-            width: 100%;
-            border-radius: 60px;
-        }
-
-        .feedback-msg {
-            margin-top: 1rem;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--verde-musgo);
-            color: #E2EED9;
-            padding: 2.5rem 1rem;
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        .footer a {
-            color: var(--amarelo-colheita);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
-            }
-            .hero-content h1 {
-                font-size: 2.3rem;
-            }
-            .section-title {
-                font-size: 2rem;
-            }
-            .stats-container {
-                flex-direction: column;
-            }
-        }
-
-        /* animação fade-up */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
-        }
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Botão flutuante de suporte (WhatsApp fictício) */
-        .float-whats {
+        /* Tooltip / Caixa de informação flutuante */
+        .info-card {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: #25D366;
-            color: white;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 245, 0.97);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 1.5rem 2rem;
+            max-width: 460px;
+            width: 90%;
+            z-index: 200;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25), 0 0 0 2px rgba(255,220,100,0.5);
+            border-left: 8px solid #F5B042;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .info-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+            color: #2A6B2F;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: 0.2s;
-            z-index: 99;
-            cursor: pointer;
-            text-decoration: none;
+            gap: 10px;
         }
-        .float-whats:hover {
-            transform: scale(1.08);
-            background: #128C7E;
+        .info-card p {
+            color: #2C4828;
+            line-height: 1.5;
+            margin-bottom: 0.8rem;
+        }
+        .info-card .tech-tag {
+            display: inline-block;
+            background: #D9E6B3;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        .close-info {
+            position: absolute;
+            top: 12px;
+            right: 18px;
+            font-size: 1.4rem;
+            color: #8B6B2E;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .close-info:hover { color: #c0392b; transform: scale(1.1); }
+
+        /* Seção extra: destaques */
+        .highlights {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .highlight-card {
+            background: rgba(255,255,240,0.85);
+            backdrop-filter: blur(4px);
+            border-radius: 28px;
+            padding: 1rem 1.8rem;
+            text-align: center;
+            flex: 1;
+            min-width: 180px;
+            border: 1px solid #FFE3A0;
+        }
+        .highlight-card i { font-size: 2rem; color: #F4A261; }
+        .footer {
+            background: #1A3F1E;
+            color: #E9F5DB;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        @media (max-width: 750px) {
+            .info-card { width: 90%; padding: 1.2rem; bottom: 15px; }
+            .map-title { font-size: 1.5rem; }
+            .nav-links { gap: 0.8rem; }
+        }
+        .btn-voltar {
+            background: #F5B042;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 0.5rem;
         }
     </style>
 </head>
@@ -392,306 +225,250 @@
 
 <header class="header">
     <div class="logo">
-        <i class="fas fa-seedling"></i>
+        <i class="fas fa-map"></i>
         <span>Agrinho 2026</span>
     </div>
     <div class="nav-links">
-        <a href="#home" class="active">Início</a>
-        <a href="#tecnologia">Tecnologia</a>
-        <a href="#sustentabilidade">Sustentabilidade</a>
-        <a href="#futuro">Futuro +</a>
-        <a href="#contato">Contato</a>
+        <a href="#home" class="active">🌾 Mapa da Fazenda</a>
+        <a href="#sobre">🌱 Sobre</a>
+        <a href="#tecnologia">📡 Tecnologias</a>
     </div>
 </header>
 
 <main>
-    <!-- Seção Hero / Home -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>🌾 Tecnologia + Agricultura + Sustentabilidade</h1>
-            <p>Construindo um futuro melhor para o campo e para o planeta — Agrinho 2026: inovação que alimenta o mundo com consciência.</p>
-            <a href="#tecnologia" class="btn">Explorar soluções <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </section>
-
-    <!-- Seção: Tecnologia na Agricultura -->
-    <section id="tecnologia" class="section fade-up">
-        <h2 class="section-title">🌱 Tecnologia que Transforma o Campo</h2>
-        <div class="cards-grid">
-            <div class="card">
-                <i class="fas fa-microchip"></i>
-                <h3>IoT & Sensores</h3>
-                <p>Sensores inteligentes monitoram umidade, nutrientes e clima em tempo real, reduzindo desperdício de água e insumos.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-drone"></i>
-                <h3>Drones Agrícolas</h3>
-                <p>Mapeamento aéreo de precisão, identificação de pragas e plantio automatizado para maior produtividade.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-chart-line"></i>
-                <h3>Big Data & IA</h3>
-                <p>Algoritmos predizem safras, otimizam rotação de culturas e auxiliam na tomada de decisão sustentável.</p>
-            </div>
-        </div>
-        <!-- Bloco de estatísticas com animação de contagem -->
-        <div class="stats-container" id="statsSection">
-            <div class="stat-item">
-                <div class="stat-number" data-target="72">0</div>
-                <p>Economia de água com IA (média)</p>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" data-target="58">0</div>
-                <p>Redução de CO₂ por hectare</p>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" data-target="85">0</div>
-                <p>+ Produtividade com agroecologia + tech</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Seção: Sustentabilidade e Práticas Regenerativas -->
-    <section id="sustentabilidade" class="section fade-up" style="background-color: #F8F9EE; border-radius: 48px 48px 0 0;">
-        <h2 class="section-title">♻️ Sustentabilidade: o alicerce do futuro</h2>
-        <div class="cards-grid">
-            <div class="card">
-                <i class="fas fa-solar-panel"></i>
-                <h3>Energia Limpa</h3>
-                <p>Fazendas movidas a energia solar e biogás reduzem emissões e geram autonomia para comunidades rurais.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-recycle"></i>
-                <h3>Economia Circular</h3>
-                <p>Aproveitamento integral de resíduos agrícolas para compostagem, biofertilizantes e novos materiais.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-tree"></i>
-                <h3>Agricultura Regenerativa</h3>
-                <p>Restauração do solo, sequestro de carbono e aumento da biodiversidade com técnicas ancestrais + inovação.</p>
-            </div>
-        </div>
-        <div style="text-align: center; margin-top: 2rem;">
-            <p style="background: #DCE8C4; display: inline-block; padding: 0.8rem 2rem; border-radius: 60px;"><i class="fas fa-lightbulb"></i> <strong>Prática Agrinho 2026:</strong> Sistemas agroflorestais integram árvores, culturas e irrigação inteligente.</p>
-        </div>
-    </section>
-
-    <!-- Seção: Futuro + Galeria inovadora -->
-    <section id="futuro" class="section fade-up">
-        <h2 class="section-title">🚀 Construindo o Futuro Agrinho 2026</h2>
-        <p style="text-align: center; max-width: 760px; margin: 0 auto 2rem auto;">A união entre conhecimento tradicional e tecnologias 4.0 gera um novo paradigma: alimentar a população sem comprometer os recursos naturais.</p>
+    <!-- Seção principal do Mapa Interativo -->
+    <section id="home" class="map-container">
+        <h1 class="map-title">🌍 Fazenda Sustentável do Futuro — Agrinho 2026</h1>
+        <p class="map-sub">✨ Clique nas áreas da fazenda para descobrir como a tecnologia, agricultura e sustentabilidade trabalham juntas ✨</p>
         
-        <div class="tech-showcase">
-            <div class="tech-card">
-                <img src="https://images.pexels.com/photos/2482386/pexels-photo-2482386.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Estufa automatizada">
-                <div class="info">
-                    <h4>Estufas Automatizadas</h4>
-                    <p>Controle climático por IoT aumenta colheita em 40% com menos água e defensivos.</p>
-                </div>
+        <div class="farm-map">
+            <div class="map-svg-container">
+                <!-- Mapa ilustrado SVG com 3 áreas interativas: Galpão (teto), Lavoura, Solo -->
+                <svg viewBox="0 0 900 550" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Fundo do campo -->
+                    <rect width="900" height="550" fill="#8FC154" rx="20"/>
+                    <!-- Céu decorativo -->
+                    <circle cx="780" cy="70" r="40" fill="#FFF7B0" opacity="0.6"/>
+                    <circle cx="820" cy="50" r="25" fill="#FFF293" opacity="0.5"/>
+                    
+                    <!-- Área de Lavoura (grande campo retangular com linhas de plantio) -->
+                    <g id="lavoura-area" class="map-area" data-area="lavoura">
+                        <rect x="60" y="200" width="500" height="280" fill="#6B9E3A" stroke="#4C7A2A" stroke-width="2" rx="16" />
+                        <!-- linhas de cultivo ilustrativas -->
+                        <line x1="80" y1="240" x2="540" y2="240" stroke="#A7D15A" stroke-width="3" stroke-dasharray="8 6"/>
+                        <line x1="80" y1="280" x2="540" y2="280" stroke="#A7D15A" stroke-width="3" stroke-dasharray="8 6"/>
+                        <line x1="80" y1="320" x2="540" y2="320" stroke="#A7D15A" stroke-width="3" stroke-dasharray="8 6"/>
+                        <line x1="80" y1="360" x2="540" y2="360" stroke="#A7D15A" stroke-width="3" stroke-dasharray="8 6"/>
+                        <line x1="80" y1="400" x2="540" y2="400" stroke="#A7D15A" stroke-width="3" stroke-dasharray="8 6"/>
+                        <line x1="80" y1="440" x2="540" y2="440" stroke="#A7D15A" stroke-width="3" stroke-dasharray="8 6"/>
+                        <!-- Ícone de drone e satélite -->
+                        <text x="460" y="260" font-size="30" fill="#FFD966" stroke="#2C4A1E" stroke-width="1">🛸</text>
+                        <text x="120" y="420" font-size="26" fill="#FFF5C4">🛰️</text>
+                        <text x="500" y="400" font-size="22" fill="white">🌾</text>
+                    </g>
+                    
+                    <!-- Galpão / Estufa com teto destacado -->
+                    <g id="telhado-galpao" class="map-area" data-area="galpao">
+                        <!-- Corpo do galpão -->
+                        <rect x="620" y="300" width="220" height="180" fill="#D4B87A" stroke="#A57C3C" stroke-width="2" rx="12"/>
+                        <!-- Teto (triangular) área clicável -->
+                        <polygon points="610,300 730,210 850,300" fill="#C49A6C" stroke="#F5B042" stroke-width="3" />
+                        <polygon points="620,300 730,220 840,300" fill="#D9AA6E" />
+                        <!-- Placas solares no telhado -->
+                        <rect x="680" y="248" width="30" height="20" fill="#2E86C1" opacity="0.9" rx="3" />
+                        <rect x="720" y="248" width="30" height="20" fill="#2E86C1" opacity="0.9" rx="3" />
+                        <rect x="760" y="252" width="30" height="20" fill="#2E86C1" opacity="0.9" rx="3" />
+                        <text x="710" y="275" font-size="14" fill="#FFF176">☀️</text>
+                        <!-- Chaminé de biomassa -->
+                        <rect x="790" y="230" width="18" height="40" fill="#8B5A2B" />
+                        <circle cx="799" cy="225" r="8" fill="#FFB347" opacity="0.7" />
+                        <text x="640" y="345" font-size="20" fill="#FFF1B5">🏭🌿</text>
+                    </g>
+                    
+                    <!-- Solo (área de sensores) - região marcada no canto esquerdo inferior -->
+                    <g id="solo-sensores" class="map-area" data-area="solo">
+                        <rect x="40" y="480" width="240" height="55" fill="#8B6946" rx="20" stroke="#D4A373" stroke-width="2" />
+                        <text x="90" y="515" font-size="18" fill="#FFF5D0">🌱 Sensores no Solo</text>
+                        <!-- pontos representando sensores -->
+                        <circle cx="130" cy="505" r="6" fill="#5DADE2" stroke="#F7DC6F" stroke-width="2"/>
+                        <circle cx="170" cy="505" r="6" fill="#5DADE2" stroke="#F7DC6F" stroke-width="2"/>
+                        <circle cx="210" cy="505" r="6" fill="#5DADE2" stroke="#F7DC6F" stroke-width="2"/>
+                        <text x="60" y="530" font-size="12" fill="white">💧 umidade inteligente</text>
+                    </g>
+                    
+                    <!-- Decorações: árvores, pássaros -->
+                    <circle cx="600" cy="180" r="28" fill="#478C2E" stroke="#2D6320"/>
+                    <circle cx="590" cy="160" r="20" fill="#5CA83B"/>
+                    <text x="560" y="130" font-size="20" fill="#F4E4A1">🐦</text>
+                    
+                    <!-- Etiquetas visuais -->
+                    <text x="250" y="190" font-size="18" fill="#FFF9CF" font-weight="bold" stroke="#1C3E1C" stroke-width="0.5">🌾 LAVOURA INTELIGENTE</text>
+                    <text x="670" y="290" font-size="16" fill="#FFF9CF" font-weight="bold">🏠 TETO SUSTENTÁVEL</text>
+                    <text x="50" y="470" font-size="16" fill="#FCF5DD" font-weight="bold">🔬 SOLO CONECTADO</text>
+                </svg>
             </div>
-            <div class="tech-card">
-                <img src="https://images.pexels.com/photos/221061/pexels-photo-221061.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Trator elétrico conectado">
-                <div class="info">
-                    <h4>Máquinas Elétricas</h4>
-                    <p>Tratores autônomos e elétricos eliminam emissões e otimizam cada metro do solo.</p>
-                </div>
+            <div style="text-align: center; margin-top: 1rem; font-size: 0.9rem; background: #FFEFBF; display: inline-block; width: auto; margin: 1rem auto; padding: 0.5rem 1rem; border-radius: 50px;">
+                <i class="fas fa-hand-pointer"></i> Clique nas áreas destacadas: Telhado do Galpão | Lavoura | Solo
             </div>
-            <div class="tech-card">
-                <img src="https://images.pexels.com/photos/2820707/pexels-photo-2820707.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Biofábrica digital">
-                <div class="info">
-                    <h4>Biofábrica Digital</h4>
-                    <p>Produção local de bioinsumos com inteligência de dados e redução de custos.</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="quote-block">
-            <i class="fas fa-quote-left" style="font-size: 2rem; opacity: 0.8;"></i>
-            <p style="font-size: 1.3rem; max-width: 700px; margin: 0.5rem auto;">“Integrar tecnologia e sustentabilidade não é apenas uma escolha, é a única direção possível para as próximas gerações.” – Manifesto Agrinho 2026</p>
         </div>
     </section>
 
-    <!-- Seção de Contato e engajamento -->
-    <section id="contato" class="section fade-up" style="background: #F4F7EA; border-radius: 48px; margin: 1rem auto;">
-        <h2 class="section-title">✉️ Faça parte da mudança</h2>
-        <p style="text-align: center; max-width: 600px; margin: 0 auto 1rem;">Compartilhe suas ideias ou projetos que unem tecnologia e agro sustentável. Vamos construir a revolução verde juntos.</p>
-        <div class="form-container">
-            <form id="contactForm">
-                <div class="form-group">
-                    <input type="text" id="nome" placeholder="Seu nome completo" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="email" placeholder="Seu melhor e-mail" required>
-                </div>
-                <div class="form-group">
-                    <textarea rows="3" id="mensagem" placeholder="Conte como a tecnologia e sustentabilidade podem andar juntas no campo..." required></textarea>
-                </div>
-                <button type="submit" class="btn btn-form"><i class="fas fa-paper-plane"></i> Enviar mensagem</button>
-                <div id="formFeedback" class="feedback-msg"></div>
-            </form>
+    <!-- Caixa de informações interativa (aparece ao clicar) -->
+    <div id="infoBox" class="info-card" style="display: none;">
+        <div class="close-info" id="closeInfoBtn">&times;</div>
+        <div id="infoContent">
+            <h3 id="infoTitle"><i class="fas fa-solar-panel"></i> Título</h3>
+            <p id="infoDesc">Descrição sobre tecnologia e sustentabilidade.</p>
+            <span id="infoTag" class="tech-tag">🌿 Tecnologia verde</span>
         </div>
-        <div style="text-align: center; margin-top: 2rem;">
-            <p><i class="fas fa-globe-americas"></i> Conecte-se com agricultores, startups e escolas que já estão plantando o amanhã.</p>
+        <button class="btn-voltar" id="hideInfoBtn">Fechar</button>
+    </div>
+
+    <!-- Seção Sobre o Projeto -->
+    <section id="sobre" style="max-width: 1100px; margin: 2rem auto; padding: 2rem; background: rgba(255,250,225,0.85); border-radius: 48px;">
+        <h2 style="color: #2C6E2F; text-align: center;"><i class="fas fa-leaf"></i> Tecnologia + Agricultura + Sustentabilidade</h2>
+        <p style="margin-top: 1rem; text-align: center;">O futuro da produção de alimentos está na integração inteligente entre inovação digital e respeito aos ciclos naturais. No mapa acima, cada ponto revela uma solução prática que já está revolucionando o campo. O Agrinho 2026 celebra essa união.</p>
+        <div class="highlights">
+            <div class="highlight-card"><i class="fas fa-chart-line"></i><h3>+40%</h3><p>Eficiência com sensores IoT</p></div>
+            <div class="highlight-card"><i class="fas fa-tint"></i><h3>70%</h3><p>Economia de água na irrigação</p></div>
+            <div class="highlight-card"><i class="fas fa-drone"></i><h3>-55%</h3><p>Redução de defensivos químicos</p></div>
+        </div>
+    </section>
+
+    <!-- Seção Tecnologias em Destaque -->
+    <section id="tecnologia" style="max-width: 1100px; margin: 2rem auto; padding: 2rem; background: #EAF7E0; border-radius: 48px;">
+        <h2 style="color: #2C6E2F; text-align: center;">📡 Soluções Integradas da Fazenda do Futuro</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1.5rem; margin-top: 2rem;">
+            <div style="background: white; border-radius: 28px; padding: 1.5rem;"><i class="fas fa-solar-panel" style="font-size: 2rem; color:#F4A261;"></i><h3>Energia Solar + Biomassa</h3><p>O teto do galpão gera energia limpa e o excesso de biomassa vira biogás.</p></div>
+            <div style="background: white; border-radius: 28px; padding: 1.5rem;"><i class="fas fa-drone" style="font-size: 2rem; color:#F4A261;"></i><h3>Monitoramento por Drones</h3><p>Imagens multiespectrais detectam pragas e falhas na lavoura com precisão.</p></div>
+            <div style="background: white; border-radius: 28px; padding: 1.5rem;"><i class="fas fa-microchip" style="font-size: 2rem; color:#F4A261;"></i><h3>Sensores de Umidade</h3><p>No solo, sensores wireless controlam irrigação gota a gota com economia real.</p></div>
         </div>
     </section>
 </main>
 
 <footer class="footer">
-    <p><i class="fas fa-tractor"></i> Agrinho 2026 — Tecnologia, Agricultura & Sustentabilidade | Construindo o futuro do campo com inovação e respeito à terra.</p>
-    <p style="margin-top: 0.7rem;">🌿 Projeto educacional inspirado no movimento Agrinho | <a href="#">Acesse nossas redes</a></p>
-    <small>© 2026 | Todos os grãos de esperança são bem-vindos.</small>
+    <p><i class="fas fa-map-marked-alt"></i> Agrinho 2026 — Fazenda Sustentável Interativa | Tecnologia, Agricultura e Sustentabilidade para um futuro melhor 🌍</p>
+    <small>Clique no mapa e explore as inovações do campo inteligente.</small>
 </footer>
 
-<!-- Botão flutuante exemplo (WhatsApp simbólico) -->
-<a href="#" class="float-whats" id="whatsBtn" aria-label="Fale conosco">
-    <i class="fab fa-whatsapp"></i>
-</a>
-
 <script>
-    // ----- fade-up ao scroll -----
-    const fadeElements = document.querySelectorAll('.fade-up');
-    
-    function checkFadeIn() {
-        const triggerBottom = window.innerHeight * 0.85;
-        fadeElements.forEach(el => {
-            const boxTop = el.getBoundingClientRect().top;
-            if(boxTop < triggerBottom) {
-                el.classList.add('visible');
-            }
-        });
-    }
-    
-    window.addEventListener('load', () => {
-        checkFadeIn();
-        startStatCounters();
-        setActiveNav();
-    });
-    window.addEventListener('scroll', () => {
-        checkFadeIn();
-        startStatCounters();
-        setActiveNav();
-    });
-    
-    // ----- Animação dos números das estatísticas -----
-    let animationTriggered = false;
-    const statNumbers = document.querySelectorAll('.stat-number');
-    
-    function startStatCounters() {
-        if(animationTriggered) return;
-        const statsSection = document.getElementById('statsSection');
-        if(!statsSection) return;
-        const rect = statsSection.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        if(rect.top < windowHeight - 80 && !animationTriggered) {
-            animationTriggered = true;
-            statNumbers.forEach(stat => {
-                const target = parseInt(stat.getAttribute('data-target'), 10);
-                let current = 0;
-                const increment = target / 55;
-                const updateCounter = () => {
-                    current += increment;
-                    if(current < target) {
-                        stat.innerText = Math.floor(current);
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        stat.innerText = target + '%';
-                    }
-                };
-                updateCounter();
-            });
+    // Dados de cada área interativa do mapa
+    const infoData = {
+        galpao: {
+            title: "🏠 Teto do Galpão — Energia Solar + Biomassa",
+            desc: "No telhado, painéis solares fotovoltaicos geram eletricidade limpa para toda a fazenda. O sistema de biomassa converte resíduos orgânicos (casca de grãos, podas) em biogás, que alimenta tratores e aquece estufas. Juntas, essas tecnologias reduzem em até 80% as emissões de carbono da propriedade, tornando-a autossuficiente e renovável.",
+            tag: "☀️ Energia limpa & Economia circular"
+        },
+        lavoura: {
+            title: "🌾 Lavoura Inteligente — Drones & Satélites",
+            desc: "Drones equipados com câmeras multiespectrais e imagens de satélite sobrevoam a lavoura diariamente. Algoritmos de IA identificam focos de pragas, fungos ou deficiências nutricionais antes que se espalhem. Com essa detecção precoce, os agricultores aplicam defensivos agrícolas apenas nas áreas afetadas, reduzindo o uso de produtos químicos em até 65% e protegendo o solo e os polinizadores.",
+            tag: "🛸 Agricultura de precisão + Redução de defensivos"
+        },
+        solo: {
+            title: "🌱 Solo Conectado — Sensores de Umidade Inteligentes",
+            desc: "Sensores enterrados na zona radicular monitoram em tempo real o nível de umidade, temperatura e nutrientes do solo. Esses dispositivos se comunicam com o sistema central de irrigação, que liga automaticamente apenas quando necessário — e na quantidade exata. Resultado: economia de água de até 70%, plantas mais saudáveis e redução do estresse hídrico. Tudo com economia financeira e respeito ao meio ambiente.",
+            tag: "💧 Irrigação inteligente + Economia hídrica"
         }
-    }
-    
-    // Menu ativo conforme scroll
-    function setActiveNav() {
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-links a');
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 130;
-            const sectionBottom = sectionTop + section.offsetHeight;
-            if(window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
-                current = section.getAttribute('id');
-            }
-        });
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            const href = link.getAttribute('href').substring(1);
-            if(href === current) {
-                link.classList.add('active');
-            } else if(current === '' && href === 'home') {
-                link.classList.add('active');
-            }
-        });
-        if(current === '' && window.scrollY < 100) {
-            document.querySelector('.nav-links a[href="#home"]')?.classList.add('active');
-        }
-    }
-    
-    // Formulário com feedback e simulação de envio
-    const form = document.getElementById('contactForm');
-    const feedbackDiv = document.getElementById('formFeedback');
-    
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const nome = document.getElementById('nome').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const mensagem = document.getElementById('mensagem').value.trim();
+    };
+
+    // Referências dos elementos SVG e áreas interativas
+    const infoBox = document.getElementById('infoBox');
+    const infoTitle = document.getElementById('infoTitle');
+    const infoDesc = document.getElementById('infoDesc');
+    const infoTag = document.getElementById('infoTag');
+
+    // Função para abrir caixa com a área específica
+    function showInfo(areaId) {
+        const data = infoData[areaId];
+        if (!data) return;
         
-        if(nome === '' || email === '' || mensagem === '') {
-            feedbackDiv.innerHTML = '<span style="color: #c0392b;"><i class="fas fa-exclamation-circle"></i> Por favor, preencha todos os campos para semear ideias!</span>';
-            return;
-        }
-        if(!email.includes('@') || !email.includes('.')) {
-            feedbackDiv.innerHTML = '<span style="color: #c0392b;"><i class="fas fa-envelope-open-text"></i> E-mail parece inválido, tente novamente.</span>';
-            return;
-        }
-        // simulação educacional de sucesso
-        feedbackDiv.innerHTML = '<span style="color: #2E7D32;"><i class="fas fa-check-circle"></i> 🌱 Obrigado, ' + nome + '! Sua mensagem plantou uma semente no futuro Agrinho 2026. 💚</span>';
-        form.reset();
+        // Atualiza conteúdo
+        infoTitle.innerHTML = data.title;
+        infoDesc.innerHTML = data.desc;
+        infoTag.innerHTML = `<i class="fas fa-microchip"></i> ${data.tag}`;
+        
+        // Exibe caixa com animação
+        infoBox.style.display = "block";
+        infoBox.style.opacity = "0";
+        infoBox.style.transform = "translateX(-50%) translateY(20px)";
         setTimeout(() => {
-            feedbackDiv.innerHTML = '';
-        }, 5000);
+            infoBox.style.opacity = "1";
+            infoBox.style.transform = "translateX(-50%) translateY(0)";
+        }, 10);
+    }
+
+    function hideInfo() {
+        infoBox.style.opacity = "0";
+        infoBox.style.transform = "translateX(-50%) translateY(20px)";
+        setTimeout(() => {
+            infoBox.style.display = "none";
+        }, 250);
+    }
+
+    // Adicionar eventos de clique nos elementos SVG com a classe 'map-area' e seus respectivos data-area
+    const areas = document.querySelectorAll('.map-area');
+    areas.forEach(area => {
+        area.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const areaType = area.getAttribute('data-area');
+            if (areaType === 'galpao') showInfo('galpao');
+            else if (areaType === 'lavoura') showInfo('lavoura');
+            else if (areaType === 'solo') showInfo('solo');
+            else showInfo('lavoura');
+        });
+        // Estilo de cursor para indicar interatividade
+        area.style.cursor = 'pointer';
     });
+
+    // Fechar com botões
+    document.getElementById('closeInfoBtn').addEventListener('click', hideInfo);
+    document.getElementById('hideInfoBtn').addEventListener('click', hideInfo);
     
-    // Navegação suave ao clicar nos links
-    const allNav = document.querySelectorAll('.nav-links a');
-    allNav.forEach(link => {
+    // Clicar fora da caixa (no fundo) também pode fechar (opcional)
+    document.addEventListener('click', function(event) {
+        if (infoBox.style.display === 'block') {
+            // Verifica se o clique não foi dentro da caixa e nem nas áreas do mapa
+            const isClickInsideBox = infoBox.contains(event.target);
+            const isClickOnArea = Array.from(areas).some(area => area.contains(event.target) || area === event.target);
+            if (!isClickInsideBox && !isClickOnArea) {
+                hideInfo();
+            }
+        }
+    });
+
+    // Navegação suave
+    document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            if(targetSection) {
+            const target = document.getElementById(targetId);
+            if(target && targetId !== 'home') {
                 e.preventDefault();
-                targetSection.scrollIntoView({ behavior: 'smooth' });
-                allNav.forEach(l => l.classList.remove('active'));
+                target.scrollIntoView({ behavior: 'smooth' });
+                document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
                 this.classList.add('active');
+            } else if(targetId === 'home') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                document.querySelector('.nav-links a[href="#home"]').classList.add('active');
             }
         });
     });
     
-    // botão WhatsApp flutuante apenas para demonstração
-    const whatsBtn = document.getElementById('whatsBtn');
-    whatsBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        alert('🌾 Olá! No Agrinho 2026, estamos construindo um futuro sustentável. Em breve nosso canal oficial estará disponível. Obrigado pelo interesse!');
-    });
-    
-    // Resetar contadores não é necessário; mas garante que ao recarregar com ancora funcione
-    setTimeout(() => {
-        startStatCounters();
-        if(window.location.hash) {
-            setTimeout(() => {
-                const target = document.querySelector(window.location.hash);
-                if(target) target.scrollIntoView({ behavior: 'smooth' });
-            }, 200);
-        }
-    }, 300);
-    
-    // Para garantir que se statsSection já estava visível
-    window.addEventListener('load', () => {
-        if(document.querySelector('.stats-container')?.getBoundingClientRect().top < window.innerHeight-50) {
-            startStatCounters();
-        }
+    // Scroll ativo menu
+    window.addEventListener('scroll', () => {
+        const sections = document.querySelectorAll('section');
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if(scrollY >= sectionTop) current = section.getAttribute('id');
+        });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href').substring(1);
+            if(href === current) link.classList.add('active');
+            if(current === null && href === 'home') link.classList.add('active');
+        });
     });
 </script>
 </body>
