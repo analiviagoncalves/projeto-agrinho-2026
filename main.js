@@ -1,22 +1,37 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // 1. Captura o elemento #mainContent do HTML
-    const mainContent = document.getElementById("mainContent");
-    
-    // 2. Captura os botões de controle de tamanho
-    const btnSmall = document.getElementById("btn-small");
-    const btnMedium = document.getElementById("btn-medium");
-    const btnLarge = document.getElementById("btn-large");
+package com.agrinho2026.model;
 
-    // 3. Cria a função que altera o estilo de fonte do #mainContent
-    btnSmall.addEventListener("click", () => {
-        mainContent.style.fontSize = "0.85rem"; // Diminui o texto de tudo que está dentro dele
-    });
+public class Pilar {
+    private Long id;
+    private String titulo;
+    private String descricao;
+    private String icone; // Nome do ícone do Lucide (ex: "cpu", "sprout")
+    private String categoria; // "tecnologia", "agricultura" ou "sustentabilidade"
 
-    btnMedium.addEventListener("click", () => {
-        mainContent.style.fontSize = "1rem";    // Volta para o tamanho padrão
-    });
+    // Construtor Padrão
+    public Pilar() {}
 
-    btnLarge.addEventListener("click", () => {
-        mainContent.style.fontSize = "1.25rem"; // Aumenta o texto de tudo que está dentro dele
-    });
-});
+    // Construtor Completo
+    public Pilar(Long id, String titulo, String descricao, String icone, String categoria) {
+        this.id = id;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.icone = icone;
+        this.categoria = categoria;
+    }
+
+    // Getters e Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getTitulo() { return titulo; }
+    public void setTitulo(String titulo) { this.titulo = titulo; }
+
+    public String getDescricao() { return descricao; }
+    public void setDescricao(String descricao) { this.descricao = descricao; }
+
+    public String getIcone() { return icone; }
+    public void setIcone(String icone) { this.icone = icone; }
+
+    public String getCategoria() { return categoria; }
+    public void setCategoria(String categoria) { this.categoria = categoria; }
+}
