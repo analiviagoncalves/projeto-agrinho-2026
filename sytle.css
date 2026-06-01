@@ -291,3 +291,18 @@ body {
   font-size: 0.8rem;
   font-weight: bold;
 }
+#mainContent {
+  /* Define o tamanho inicial do texto como padrão (1rem = 16px) */
+  font-size: 1rem; 
+  
+  /* Garante uma transição suave quando o tamanho da fonte mudar */
+  transition: font-size 0.3s ease; 
+  
+  width: 100%;
+}
+
+/* Garante que os elementos filhos herdem ou respeitem o tamanho do pai */
+#mainContent p {
+  font-size: 1em; /* 1em significa '100% do tamanho do #mainContent' */
+  margin-bottom: 15px;
+}
