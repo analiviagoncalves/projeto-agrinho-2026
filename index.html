@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Agrinho 2026 - Fazenda do Futuro | Tecnologia, Agricultura e Sustentabilidade: Mapa Interativo, Jornada do Alimento e Jogo Eco-Agro">
+    <title>Agrinho 2026 | Fazenda do Futuro - Byte à Mesa + Eco-Agro</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Chart.js para gráficos dinâmicos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            background: #F5F7E9;
+            color: #1F3B1A;
+            transition: background 0.3s, color 0.2s;
+            line-height: 1.5;
+        }
+        /* Temas */
+        body.dark-mode {
+            background: #1A2A1A;
+            color: #E8F0DF;
+        }
+        body.dark-mode .card, body.dark-mode .info-card, body.dark-mode .timeline-card, body.dark-mode .highlight-card, 
+        body.dark-mode .form-container, body.dark-mode .game-panel, body.dark-mode .farm-map {
+            background: #2E3A2B;
+            color: #E2EED9;
+            border-color: #5B8C4E;
+        }
+        body.dark-mode .header { background: #0E2A12; }
+        body.dark-mode .btn { background: #4C8C3A; }
+        
+        /* Header */
+        .header {
+            background: rgba(30, 58, 30, 0.96);
+            backdrop-filter: blur(8px);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .logo { display: flex; align-items: center; gap: 12px; font-size: 1.5rem; font-weight: 800; }
+        .nav-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 600; transition: 0.2s; padding: 6px 12px; border-radius: 30px; }
+        .nav-links a:hover, .nav-links a.active { background: #FFD966; color: #1A3A1E; }
+        .theme-toggle { background: #FFE0A3; border: none; padding: 8px 14px; border-radius: 40px; cursor: pointer; font-weight: bold; display: flex; gap: 8px; }
+        
+        /* Seções comuns */
+        .section { max-width: 1400px; margin: 2rem auto; padding: 2rem; background: rgba(250,250,235,0.7); border-radius: 48px; }
+        .section-title { font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 1.5rem; color: #2C6E2F; }
+        body.dark-mode .section-title { color: #C3E6A5; }
+        
+        /* Mapa Interativo (Fazenda) */
+        .farm-map { background: #AACC77; border-radius: 48px; padding: 1.5rem; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .map-svg-container svg { width: 100%; height: auto; border-radius: 32px; cursor: pointer; }
+        .map-area { cursor: pointer; transition: filter 0.2s; }
+        .map-area:hover { filter: brightness(1.05); stroke: #FFD966; stroke-width: 3; }
+        .info-card {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: white; border-radius: 28px; padding: 1.5rem; max-width: 450px; width: 90%;
+            z-index: 200; box-shadow: 0 20px 35px rgba(0,0,0,0.3); border-left: 8px solid #F5B042;
+            transition: 0.2s; display: none;
+        }
+        .close-info { position: absolute; top: 12px; right: 18px; font-size: 1.5rem; cursor: pointer; }
+        
+        /* Jornada Timeline */
+        .timeline { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin: 2rem 0; }
+        .timeline-card { background: white; border-radius: 28px; padding: 1.5rem; flex: 1; min-width: 230px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.1); transition: 0.2s; cursor: pointer; }
+        .timeline-card:hover { transform: translateY(-8px); background: #FFF6E0; }
+        .timeline-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .qr-code { background: #eef2e6; border-radius: 20px; padding: 1rem; text-align: center; margin-top: 1rem; }
+        
+        /* Jogo Eco-Agro */
+        .game-panel { background: #FCF9E8; border-radius: 32px; padding: 1.5rem; margin-top: 2rem; }
+        .game-question { font-size: 1.4rem; font-weight: bold; margin: 1rem 0; }
+        .game-buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+        .game-btn { background: #4F8A3E; color: white; border: none; padding: 12px 24px; border-radius: 60px; cursor: pointer; font-weight: bold; }
+        .game-btn:hover { transform: scale(1.02); background: #2E6B2E; }
+        .game-metrics { display: flex; justify-content: space-around; margin: 1.5rem 0; flex-wrap: wrap; gap: 2rem; }
+        .metric { text-align: center; }
+        
+        /* Gráficos */
+        .chart-container { max-width: 400px; margin: 1rem auto; }
+        
+        /* Acessibilidade */
+        .accessibility-bar { display: flex; gap: 0.5rem; justify-content: flex-end; margin-bottom: 0.5rem; }
+        .access-btn { background: #5B8C5A; border: none; padding: 5px 12px; border-radius: 50px; color: white; cursor: pointer; font-size: 0.8rem; }
+        .high-contrast { background: #000; color: #FFF; }
+        .high-contrast .card, .high-contrast .farm-map { background: #111; border: 2px solid yellow; color: white; }
+        
+        .footer { background: #1A3F1E; color: #E9F5DB; text-align: center; padding: 2rem; margin-top: 2rem; }
+        @media (max-width: 780px) { .nav-links { gap: 0.8rem; } .section { padding: 1rem; } }
+    </style>
+</head>
+<body>
+<header class="header">
+    <div class="logo"><i class="fas fa-seedling"></i> Agrinho 2026</div>
+    <div class="nav-links">
+        <a href="#home" class="active">🏡 Mapa</a>
+        <a href="#jornada">📖 Byte à Mesa</a>
+        <a href="#jogo">🎮 Eco-Agro Jogo</a>
+        <a href="#tecnologia">🌿 Tecnologia Verde</a>
+    </div>
+    <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i> Modo</button>
+</header>
+<div class="accessibility-bar" style="max-width: 1400px; margin: 0.5rem auto; padding: 0 1rem;">
+    <button class="access-btn" id="highContrastBtn"><i class="fas fa-eye"></i> Alto Contraste</button>
+    <button class="access-btn" id="speakTextBtn"><i class="fas fa-volume-up"></i> Ler Texto</button>
+</div>
+
+<main>
+    <!-- 1. Mapa Interativo da Fazenda do Futuro -->
+    <section id="home" class="section">
+        <h2 class="section-title">🌍 Fazenda do Futuro — Mapa Interativo</h2>
+        <div class="farm-map">
+            <div class="map-svg-container">
+                <svg viewBox="0 0 900 550" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="900" height="550" fill="#8FC154" rx="20"/>
+                    <circle cx="780" cy="70" r="40" fill="#FFF7B0" opacity="0.6"/>
+                    <!-- Área Lavoura -->
+                    <g id="lavoura-area" class="map-area" data-area="lavoura">
+                        <rect x="60" y="200" width="500" height="280" fill="#6B9E3A" stroke="#4C7A2A" stroke-width="2" rx="16"/>
+                        <line x1="80" y1="240" x2="540" y2="240" stroke="#A7D15A" stroke-width="3" stroke-dasharray="8 6"/>
+                        <line x1="80" y1="280" x2="540" y2="280" stroke="#A7D15A" stroke-width="3" stroke-dasharray="8 6"/>
+                        <line x1="80" y1="320" x2="540" y2="320" stroke="#A7D15A" stroke-width="3" stroke-dasharray="8 6"/>
+                        <text x="460" y="260" font-size="30" fill="#FFD966">🛸</text><text x="120" y="420" font-size="26" fill="#FFF5C4">🛰️</text>
+                    </g>
+                    <!-- Galpão Teto -->
+                    <g id="telhado-galpao" class="map-area" data-area="galpao">
+                        <rect x="620" y="300" width="220" height="180" fill="#D4B87A" stroke="#A57C3C" stroke-width="2" rx="12"/>
+                        <polygon points="610,300 730,210 850,300" fill="#C49A6C" stroke="#F5B042" stroke-width="3"/>
+                        <rect x="680" y="248" width="30" height="20" fill="#2E86C1" opacity="0.9" rx="3"/>
+                        <rect x="720" y="248" width="30" height="20" fill="#2E86C1" opacity="0.9" rx="3"/>
+                        <text x="710" y="275" font-size="14" fill="#FFF176">☀️</text>
+                        <rect x="790" y="230" width="18" height="40" fill="#8B5A2B"/><circle cx="799" cy="225" r="8" fill="#FFB347"/>
+                    </g>
+                    <!-- Solo sensores -->
+                    <g id="solo-sensores" class="map-area" data-area="solo">
+                        <rect x="40" y="480" width="240" height="55" fill="#8B6946" rx="20" stroke="#D4A373" stroke-width="2"/>
+                        <circle cx="130" cy="505" r="6" fill="#5DADE2"/><circle cx="170" cy="505" r="6" fill="#5DADE2"/>
+                        <text x="60" y="530" font-size="12" fill="white">💧 sensores de umidade</text>
+                    </g>
+                    <text x="250" y="190" fill="#FFF9CF" font-weight="bold">🌾 LAVOURA</text>
+                    <text x="670" y="290" fill="#FFF9CF">🏠 TETO SUSTENTÁVEL</text>
+                </svg>
+            </div>
+            <p style="text-align:center; margin-top:0.8rem;"><i class="fas fa-hand-pointer"></i> Clique nas áreas: Telhado, Lavoura ou Solo</p>
+        </div>
+    </section>
+
+    <!-- 2. Jornada "Do Byte à Mesa" (Storytelling) -->
+    <section id="jornada" class="section">
+        <h2 class="section-title">📱 Do Byte à Mesa: A Jornada do Milho Sustentável</h2>
+        <div class="timeline">
+            <div class="timeline-card" data-phase="1">
+                <div class="timeline-icon"><i class="fas fa-tractor"></i></div>
+                <h3>🌱 Fase 1: Plantio de Precisão</h3>
+                <p>Tratores guiados por GPS evitam sobreposição de sementes, reduzem compactação do solo e economizam insumos.</p>
+                <small>✅ redução de 15% de desperdício de sementes</small>
+            </div>
+            <div class="timeline-card" data-phase="2">
+                <div class="timeline-icon"><i class="fas fa-flask"></i></div>
+                <h3>🍄 Fase 2: Bioinsumos no Crescimento</h3>
+                <p>Defensivos naturais (fungos e bactérias benéficas) substituem químicos pesados, protegendo polinizadores e o solo.</p>
+                <small>🌿 60% menos defensivos químicos</small>
+            </div>
+            <div class="timeline-card" data-phase="3">
+                <div class="timeline-icon"><i class="fas fa-qrcode"></i></div>
+                <h3>📦 Fase 3: Rastreabilidade Blockchain</h3>
+                <p>Cada saca recebe um QR Code único. No supermercado, o consumidor escaneia e descobre a história da fazenda.</p>
+                <small>🔗 Transparência total da origem</small>
+            </div>
+        </div>
+        <div class="qr-code" id="qrBlock">
+            <i class="fas fa-qrcode" style="font-size: 3rem;"></i>
+            <p><strong>Simulação de Rastreabilidade:</strong> Escaneie o QR Code no mercado e veja dados da fazenda: <span id="qrData">Fazenda Solaris - 0 emissões líquidas - Certificação Sustentável</span></p>
+            <button id="simulateQR" class="btn" style="background:#2E6B2E;">🔍 Simular Leitura QR</button>
+        </div>
+    </section>
+
+    <!-- 3. Portal Eco-Agro: O Jogo do Equilíbrio -->
+    <section id="jogo" class="section">
+        <h2 class="section-title">⚖️ Eco-Agro: Jogo do Equilíbrio</h2>
+        <div class="game-panel">
+            <div id="gameText" class="game-question">Você é gestor da fazenda. O que fazer?</div>
+            <div class="game-buttons" id="gameButtons"></div>
+            <div class="game-metrics">
+                <div class="metric"><h3>📊 Produtividade</h3><canvas id="prodChart" width="200" height="150" style="max-width:200px"></canvas><span id="prodValue">50</span>%</div>
+                <div class="metric"><h3>🌳 Sustentabilidade</h3><canvas id="sustChart" width="200" height="150" style="max-width:200px"></canvas><span id="sustValue">50</span>%</div>
+            </div>
+            <button id="resetGame" class="game-btn">♻️ Reiniciar Simulação</button>
+        </div>
+    </section>
+
+    <!-- 4. Tecnologia Verde + Inovações Sustentáveis + Mitos vs Verdades -->
+    <section id="tecnologia" class="section">
+        <h2 class="section-title">🌿 Tecnologias & Inovações Sustentáveis</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.5rem;">
+            <div class="card" style="background: white; padding: 1.5rem; border-radius: 28px;"><i class="fas fa-drone" style="font-size:2rem"></i><h3>Drones + IA</h3><p>Identificação precoce de pragas reduz defensivos em até 65%.</p></div>
+            <div class="card" style="background: white; padding: 1.5rem; border-radius: 28px;"><i class="fas fa-solar-panel"></i><h3>Energia Solar + Biomassa</h3><p>Teto do galpão gera energia limpa e resíduos viram biogás.</p></div>
+            <div class="card" style="background: white; padding: 1.5rem; border-radius: 28px;"><i class="fas fa-tint"></i><h3>Sensores de Umidade IoT</h3><p>Irrigação inteligente economiza até 70% de água.</p></div>
+        </div>
+        <div style="margin-top: 2rem; background: #E6F0DA; border-radius: 32px; padding: 1.5rem;">
+            <h3>🤔 Mitos vs Verdades do Agro</h3>
+            <div id="mythPanel"><p><strong>Mito:</strong> "Tecnologia no campo aumenta desigualdade" → <span style="color:green">VERDADE: A agricultura digital democratiza acesso a dados e reduz custos para pequenos produtores.</span></p>
+            <p><strong>Mito:</strong> "Agro sustentável não produz o suficiente" → <span style="color:green">VERDADE: ILPF e bioinsumos aumentam produtividade em 30%.</span></p></div>
+        </div>
+        <div class="chart-container" style="margin-top:1rem"><canvas id="impactChart" width="400" height="200"></canvas><p style="text-align:center">Redução de emissões com tecnologias verdes (dados simulados)</p></div>
+    </section>
+</main>
+<footer class="footer"><p><i class="fas fa-leaf"></i> Agrinho 2026 — Tecnologia, Agricultura, Sustentabilidade: Mapa Interativo, Jornada do Alimento e Jogo Eco-Agro 🌎</p></footer>
+
+<div id="infoBox" class="info-card"><div class="close-info" id="closeInfoBtn">&times;</div><h3 id="infoTitle"></h3><p id="infoDesc"></p><span id="infoTag" class="tech-tag"></span><button class="btn-voltar" id="hideInfoBtn" style="margin-top:1rem">Fechar</button></div>
+
+<script>
+    // Mapa interativo
+    const infoBox = document.getElementById('infoBox');
+    const infoTitle = document.getElementById('infoTitle');
+    const infoDesc = document.getElementById('infoDesc');
+    const infoTag = document.getElementById('infoTag');
+    function showInfo(area) {
+        const data = { galpao:{title:"🏠 Teto do Galpão: Energia Solar + Biomassa", desc:"Painéis solares no telhado geram eletricidade, e biodigestores convertem resíduos orgânicos em biogás para tratores. Energia renovável 24h, reduzindo CO₂ e custos.", tag:"☀️ Autossuficiência energética"},
+        lavoura:{title:"🌾 Lavoura: Drones e Satélites contra Pragas", desc:"Imagens multiespectrais detectam focos iniciais de pragas, permitindo aplicação localizada de defensivos. Redução de 65% de químicos, proteção de abelhas e solo.", tag:"🛸 Agricultura de precisão"},
+        solo:{title:"🌱 Solo Conectado: Sensores de Umidade", desc:"Sensores enterrados enviam dados em tempo real. A irrigação liga apenas quando necessário, economia de até 70% de água e raízes mais saudáveis.", tag:"💧 Irrigação inteligente"}};
+        const d = data[area];
+        if(d){ infoTitle.innerHTML=d.title; infoDesc.innerHTML=d.desc; infoTag.innerHTML=d.tag; infoBox.style.display="block"; }
+    }
+    document.querySelectorAll('.map-area').forEach(el=>{ el.addEventListener('click',(e)=>{ e.stopPropagation(); const area = el.getAttribute('data-area'); showInfo(area); }); });
+    document.getElementById('closeInfoBtn').addEventListener('click',()=>infoBox.style.display='none');
+    document.getElementById('hideInfoBtn').addEventListener('click',()=>infoBox.style.display='none');
+    
+    // Jogo Eco-Agro (Simulador de Equilíbrio)
+    let productivity = 50, sustainability = 50;
+    const prodChartCtx = document.getElementById('prodChart').getContext('2d');
+    const sustChartCtx = document.getElementById('sustChart').getContext('2d');
+    let prodChart, sustChart;
+    function updateCharts() {
+        if(prodChart) prodChart.destroy(); if(sustChart) sustChart.destroy();
+        prodChart = new Chart(prodChartCtx, { type: 'doughnut', data: { labels: ['Produtividade', 'Restante'], datasets: [{ data: [productivity, 100-productivity], backgroundColor: ['#4CAF50','#ddd'] }] } });
+        sustChart = new Chart(sustChartCtx, { type: 'doughnut', data: { labels: ['Sustentabilidade', 'Restante'], datasets: [{ data: [sustainability, 100-sustainability], backgroundColor: ['#2E86C1','#ddd'] }] } });
+        document.getElementById('prodValue').innerText = productivity;
+        document.getElementById('sustValue').innerText = sustainability;
+    }
+    const scenarios = [
+        { text: "💰 Você recebe verba extra. Investir em: 1) Mais área plantada OU 2) Reflorestamento de APP?", opt1: "Expandir plantio", opt2: "Reflorestar APP", effect1: {prod:+15, sust:-10}, effect2: {prod:+5, sust:+20} },
+        { text: "🌧️ Estiagem prevista. 1) Irrigação convencional intensa OU 2) Sensores de umidade + irrigação localizada?", opt1: "Irrigação intensa", opt2: "Sensores inteligentes", effect1: {prod:+5, sust:-15}, effect2: {prod:+10, sust:+10} },
+        { text: "Pragas na lavoura. 1) Defensivo químico total OU 2) Biológicos + Drones?", opt1: "Químico pesado", opt2: "Controle biológico", effect1: {prod:+20, sust:-20}, effect2: {prod:+8, sust:+12} }
+    ];
+    let currentScenario = 0;
+    function loadScenario() {
+        const s = scenarios[currentScenario];
+        document.getElementById('gameText').innerHTML = s.text;
+        const btnsDiv = document.getElementById('gameButtons');
+        btnsDiv.innerHTML = `<button class="game-btn" data-choice="1">✅ ${s.opt1}</button><button class="game-btn" data-choice="2">🌿 ${s.opt2}</button>`;
+        document.querySelectorAll('[data-choice]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const choice = e.currentTarget.getAttribute('data-choice');
+                const effect = choice === '1' ? scenarios[currentScenario].effect1 : scenarios[currentScenario].effect2;
+                productivity = Math.min(100, Math.max(0, productivity + effect.prod));
+                sustainability = Math.min(100, Math.max(0, sustainability + effect.sust));
+                updateCharts();
+                currentScenario = (currentScenario + 1) % scenarios.length;
+                loadScenario();
+            });
+        });
+    }
+    document.getElementById('resetGame').addEventListener('click',()=>{ productivity=50; sustainability=50; updateCharts(); currentScenario=0; loadScenario(); });
+    updateCharts(); loadScenario();
+
+    // Simulação QR Code (Blockchain)
+    document.getElementById('simulateQR').addEventListener('click',()=>{
+        const qrSpan = document.getElementById('qrData');
+        qrSpan.innerHTML = "✅ Produto rastreado: Fazenda Sustentável Agrinho. 🌾 Tecnologia: irrigação por sensores, energia solar, bioinsumos. Colheita com baixo carbono. Escaneie o código real na embalagem!";
+        alert("📱 Leitura QR simulada: Origem 100% rastreada - Blockchain certifica práticas sustentáveis.");
+    });
+    
+    // Gráfico de impacto (redução de emissões)
+    const ctxImpact = document.getElementById('impactChart').getContext('2d');
+    new Chart(ctxImpact, { type: 'line', data: { labels: ['2022','2023','2024','2025','2026'], datasets: [{ label: 'Emissões (kg CO₂/ha)', data: [620, 540, 430, 290, 180], borderColor: '#4CAF50', tension: 0.3, fill: true }] } });
+    
+    // Modo Escuro/Claro
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click',()=>{ document.body.classList.toggle('dark-mode'); localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light'); });
+    if(localStorage.getItem('theme')==='dark') document.body.classList.add('dark-mode');
+    
+    // Alto Contraste
+    let highContrast = false;
+    document.getElementById('highContrastBtn').addEventListener('click',()=>{ document.body.classList.toggle('high-contrast'); highContrast=!highContrast; });
+    
+    // Leitura de texto (acessibilidade simples)
+    const speakBtn = document.getElementById('speakTextBtn');
+    speakBtn.addEventListener('click',()=>{
+        const textToRead = document.querySelector('main').innerText;
+        const utterance = new SpeechSynthesisUtterance(textToRead.substring(0, 800));
+        utterance.lang = 'pt-BR';
+        speechSynthesis.cancel();
+        speechSynthesis.speak(utterance);
+    });
+    
+    // Navegação suave e active class
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll',()=>{ let current=''; sections.forEach(sec=>{ if(window.scrollY>=sec.offsetTop-150) current=sec.getAttribute('id'); }); navLinks.forEach(link=>{ link.classList.remove('active'); if(link.getAttribute('href').substring(1)===current) link.classList.add('active'); }); });
+    navLinks.forEach(link=>{ link.addEventListener('click',function(e){ const id=this.getAttribute('href').substring(1); const el=document.getElementById(id); if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); } }); });
+</script>
+</body>
+</html>
