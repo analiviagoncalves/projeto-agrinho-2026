@@ -193,18 +193,618 @@
     </section>
 
     <!-- 3. Portal Eco-Agro: O Jogo do Equilíbrio -->
-    <section id="jogo" class="section">
-        <h2 class="section-title">⚖️ Eco-Agro: Jogo do Equilíbrio</h2>
-        <div class="game-panel">
-            <div id="gameText" class="game-question">Você é gestor da fazenda. O que fazer?</div>
-            <div class="game-buttons" id="gameButtons"></div>
-            <div class="game-metrics">
-                <div class="metric"><h3>📊 Produtividade</h3><canvas id="prodChart" width="200" height="150" style="max-width:200px"></canvas><span id="prodValue">50</span>%</div>
-                <div class="metric"><h3>🌳 Sustentabilidade</h3><canvas id="sustChart" width="200" height="150" style="max-width:200px"></canvas><span id="sustValue">50</span>%</div>
+    <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Agro: Jogo do Equilíbrio | Agrinho 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(145deg, #C8E6F5 0%, #B2DFEE 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .game-container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(14px);
+            border-radius: 56px;
+            padding: 2rem;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 245, 0.8);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #1A6B5E, #3AA87F);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .sub {
+            text-align: center;
+            color: #2A7A6E;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .game-panel {
+            background: rgba(255, 255, 245, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 48px;
+            padding: 1.8rem;
+        }
+
+        .game-question {
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-align: center;
+            background: linear-gradient(135deg, #2A7A6E, #4FC3A0);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1.8rem;
+            line-height: 1.4;
+        }
+
+        .game-buttons {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .game-btn {
+            background: linear-gradient(120deg, #3AA87F, #2D8C6A);
+            border: none;
+            padding: 14px 28px;
+            border-radius: 60px;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .game-btn:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(120deg, #4FC3A0, #3AA87F);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-metrics {
+            display: flex;
+            justify-content: space-around;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .metric {
+            text-align: center;
+            flex: 1;
+            min-width: 160px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 32px;
+            padding: 1rem;
+        }
+
+        .metric h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #1A6B5E;
+        }
+
+        .metric canvas {
+            max-width: 160px;
+            margin: 0 auto;
+        }
+
+        .metric span {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #2D8C6A;
+            margin-top: 0.5rem;
+        }
+
+        .reset-btn {
+            background: linear-gradient(120deg, #FFB347, #FF8C00);
+            border: none;
+            padding: 12px 28px;
+            border-radius: 60px;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+
+        .reset-btn:hover {
+            transform: scale(1.02);
+            background: linear-gradient(120deg, #FFC065, #FFA233);
+        }
+
+        .feedback-area {
+            margin-top: 1.5rem;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 40px;
+            font-weight: 500;
+            background: rgba(255, 255, 200, 0.6);
+            transition: all 0.3s;
+        }
+
+        .progress-info {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #2A7A6E;
+            font-weight: 500;
+        }
+
+        @media (max-width: 640px) {
+            .game-container { padding: 1rem; }
+            .game-question { font-size: 1.1rem; }
+            .game-btn { padding: 10px 16px; font-size: 0.85rem; min-width: 140px; }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="game-container">
+    <h1>⚖️ Eco-Agro: Jogo do Equilíbrio</h1>
+    <p class="sub">🌱 Tome decisões sustentáveis e equilibre produção com preservação</p>
+    
+    <div class="game-panel">
+        <div id="gameText" class="game-question">Carregando cenário...</div>
+        <div class="game-buttons" id="gameButtons"></div>
+        
+        <div class="game-metrics">
+            <div class="metric">
+                <h3>📊 Produtividade</h3>
+                <canvas id="prodChart" width="160" height="160"></canvas>
+                <span id="prodValue">50</span>%
             </div>
-            <button id="resetGame" class="game-btn">♻️ Reiniciar Simulação</button>
+            <div class="metric">
+                <h3>🌳 Sustentabilidade</h3>
+                <canvas id="sustChart" width="160" height="160"></canvas>
+                <span id="sustValue">50</span>%
+            </div>
         </div>
-    </section>
+        
+        <button id="resetGame" class="reset-btn">♻️ Reiniciar Jornada</button>
+        <div id="feedbackMsg" class="feedback-area"></div>
+        <div id="progressInfo" class="progress-info"></div>
+    </div>
+</div>
+
+<script>
+    // ========== BANCO DE PERGUNTAS (12 CENÁRIOS VARIADOS) ==========
+    const allScenarios = [
+        {
+            text: "🌧️ Você recebeu R$ 500 mil para investir na fazenda. Qual decisão toma?",
+            opt1: "💰 Expandir área de plantio convencional",
+            opt2: "🌳 Investir em reflorestamento de APP + energia solar",
+            effect1: { prod: +15, sust: -12 },
+            effect2: { prod: +5, sust: +22 },
+            desc1: "A produção aumentou rapidamente, mas a biodiversidade local diminuiu.",
+            desc2: "Árvores protegem o solo, atraem polinizadores e geram energia limpa!"
+        },
+        {
+            text: "🦗 Uma praga está atacando a lavoura. Qual ação tomar?",
+            opt1: "🧪 Aplicar defensivo químico de amplo espectro",
+            opt2: "🛸 Usar drones + biopesticidas direcionados",
+            effect1: { prod: +18, sust: -20 },
+            effect2: { prod: +12, sust: +12 },
+            desc1: "A praga foi controlada, mas o solo e os polinizadores foram afetados.",
+            desc2: "Aplicação localizada resolveu o problema sem danos colaterais!"
+        },
+        {
+            text: "💧 O verão foi muito seco e os reservatórios estão baixos. Como lidar?",
+            opt1: "⛲ Irrigação por aspersão convencional (alto consumo)",
+            opt2: "📡 Instalar sensores de umidade + gotejamento inteligente",
+            effect1: { prod: +5, sust: -18 },
+            effect2: { prod: +10, sust: +15 },
+            desc1: "A água acabou rápido e o custo energético disparou.",
+            desc2: "Economia de 70% de água! Plantas mais saudáveis."
+        },
+        {
+            text: "🏭 Um empresário quer instalar uma indústria ao lado da fazenda. O que fazer?",
+            opt1: "🤝 Aceitar a parceria sem exigências ambientais",
+            opt2: "🛡️ Negociar compensações ambientais e monitoramento",
+            effect1: { prod: +25, sust: -25 },
+            effect2: { prod: +10, sust: +12 },
+            desc1: "O dinheiro entrou, mas a poluição afetou a produção futura.",
+            desc2: "Desenvolvimento responsável com ganho de longo prazo!"
+        },
+        {
+            text: "🌾 Você precisa aumentar a produtividade. Qual estratégia adota?",
+            opt1: "🌽 Plantio intensivo com fertilizantes químicos",
+            opt2: "🔄 Rotação de culturas + adubação verde",
+            effect1: { prod: +20, sust: -15 },
+            effect2: { prod: +8, sust: +12 },
+            desc1: "A produção subiu, mas o solo ficou desgastado.",
+            desc2: "Solo mais fértil a longo prazo e menos erosão!"
+        },
+        {
+            text: "🐝 Abelhas estão desaparecendo na região. O que fazer?",
+            opt1: "🚫 Ignorar, pois não afeta diretamente a produção",
+            opt2: "🌸 Plantar faixas de flores nativas e reduzir pesticidas",
+            effect1: { prod: +0, sust: -15 },
+            effect2: { prod: +5, sust: +18 },
+            desc1: "A polinização caiu e a produtividade futura foi prejudicada.",
+            desc2: "As abelhas voltaram e a produção aumentou naturalmente!"
+        },
+        {
+            text: "⚡ A conta de energia da fazenda está muito alta. O que fazer?",
+            opt1: "🔌 Reduzir operações noturnas e cortar custos",
+            opt2: "☀️ Instalar painéis solares no telhado do galpão",
+            effect1: { prod: -8, sust: +2 },
+            effect2: { prod: +5, sust: +15 },
+            desc1: "A produção caiu devido à menor operação.",
+            desc2: "Energia limpa e autossuficiência energética!"
+        },
+        {
+            text: "🌍 Você quer obter uma certificação ambiental. Qual caminho seguir?",
+            opt1: "📄 Apenas pagar pela certificação sem mudanças reais",
+            opt2: "🌿 Implementar práticas regenerativas e documentar tudo",
+            effect1: { prod: +2, sust: -5 },
+            effect2: { prod: +8, sust: +20 },
+            desc1: "Certificação cancelada por falta de evidências.",
+            desc2: "Certificação conquistada! Produtos valorizados no mercado."
+        },
+        {
+            text: "🚜 Seus tratores são antigos e poluem muito. O que fazer?",
+            opt1: "🔧 Continuar usando até quebrar",
+            opt2: "⚡ Investir em tratores elétricos e eficientes",
+            effect1: { prod: -5, sust: -10 },
+            effect2: { prod: +12, sust: +15 },
+            desc1: "Manutenção cara e emissões altas continuaram.",
+            desc2: "Redução drástica de emissões e menor custo operacional!"
+        },
+        {
+            text: "💩 Você tem muito resíduo orgânico na fazenda. O que fazer?",
+            opt1: "🗑️ Descartar em aterro sanitário",
+            opt2: "🔄 Transformar em biogás e composto orgânico",
+            effect1: { prod: +0, sust: -12 },
+            effect2: { prod: +8, sust: +18 },
+            desc1: "Perda de nutrientes e poluição do solo.",
+            desc2: "Energia renovável e fertilizante natural de graça!"
+        },
+        {
+            text: "🌊 Um rio próximo está sendo assoreado. Qual atitude tomar?",
+            opt1: "⛔ Não é problema meu, ignorar",
+            opt2: "🌳 Recuperar mata ciliar e construir barraginhas",
+            effect1: { prod: -5, sust: -20 },
+            effect2: { prod: +5, sust: +22 },
+            desc1: "A água ficou turva e a irrigação prejudicada.",
+            desc2: "Água limpa de volta e mais vida ao redor!"
+        },
+        {
+            text: "📈 Você quer modernizar a gestão da fazenda. O que priorizar?",
+            opt1: "📱 Apenas um software básico de planilhas",
+            opt2: "🛰️ Sistema integrado: IoT, drones e big data",
+            effect1: { prod: +5, sust: +2 },
+            effect2: { prod: +18, sust: +12 },
+            desc1: "Melhoria pequena, ainda há desperdícios.",
+            desc2: "Eficiência total! Redução de insumos e aumento de produção!"
+        }
+    ];
+
+    // ========== VARIÁVEIS DO JOGO ==========
+    let productivity = 50;
+    let sustainability = 50;
+    let remainingScenarios = [];    // Fila de perguntas embaralhadas
+    let currentScenario = null;
+    let questionsAnswered = 0;
+    let totalQuestions = 0;
+    
+    let prodChart, sustChart;
+    
+    // Elementos DOM
+    const gameText = document.getElementById('gameText');
+    const gameButtons = document.getElementById('gameButtons');
+    const prodValueSpan = document.getElementById('prodValue');
+    const sustValueSpan = document.getElementById('sustValue');
+    const resetBtn = document.getElementById('resetGame');
+    const feedbackDiv = document.getElementById('feedbackMsg');
+    const progressSpan = document.getElementById('progressInfo');
+    
+    // ========== FUNÇÃO DE EMBARALHAR (FISHER-YATES) ==========
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+    
+    // ========== INICIALIZAR OU REINICIAR JOGO ==========
+    function initGame() {
+        // Resetar valores
+        productivity = 50;
+        sustainability = 50;
+        questionsAnswered = 0;
+        
+        // Criar cópia embaralhada das perguntas
+        remainingScenarios = shuffleArray([...allScenarios]);
+        totalQuestions = remainingScenarios.length;
+        
+        // Atualizar gráficos
+        updateCharts();
+        
+        // Limpar feedback
+        feedbackDiv.innerHTML = '';
+        feedbackDiv.style.background = 'rgba(255, 255, 200, 0.6)';
+        
+        // Carregar primeira pergunta
+        loadNextQuestion();
+        updateProgressInfo();
+    }
+    
+    // ========== CARREGAR PRÓXIMA PERGUNTA ==========
+    function loadNextQuestion() {
+        if (remainingScenarios.length === 0) {
+            // Fim do jogo! Mostrar resultado final
+            endGame();
+            return;
+        }
+        
+        // Pega a próxima pergunta da fila
+        currentScenario = remainingScenarios.shift();
+        
+        // Atualizar texto da pergunta
+        gameText.innerHTML = currentScenario.text;
+        
+        // Criar botões dinamicamente
+        gameButtons.innerHTML = `
+            <button class="game-btn" data-choice="1">
+                🌱 ${currentScenario.opt1}
+            </button>
+            <button class="game-btn" data-choice="2">
+                🌿 ${currentScenario.opt2}
+            </button>
+        `;
+        
+        // Adicionar eventos aos botões
+        document.querySelectorAll('[data-choice]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const choice = btn.getAttribute('data-choice');
+                const effect = choice === '1' ? currentScenario.effect1 : currentScenario.effect2;
+                const desc = choice === '1' ? currentScenario.desc1 : currentScenario.desc2;
+                
+                // Aplicar efeitos nos valores (limitando entre 0 e 100)
+                productivity = Math.min(100, Math.max(0, productivity + effect.prod));
+                sustainability = Math.min(100, Math.max(0, sustainability + effect.sust));
+                
+                questionsAnswered++;
+                
+                // Atualizar gráficos
+                updateCharts();
+                
+                // Mostrar feedback da escolha
+                showChoiceFeedback(desc, effect);
+                
+                // Atualizar progresso
+                updateProgressInfo();
+                
+                // Carregar próxima pergunta ou finalizar
+                if (remainingScenarios.length === 0) {
+                    setTimeout(() => {
+                        endGame();
+                    }, 2000);
+                } else {
+                    setTimeout(() => {
+                        loadNextQuestion();
+                    }, 1800);
+                }
+            }, { once: true }); // Garante que o botão só será clicado uma vez
+        });
+    }
+    
+    // ========== ATUALIZAR GRÁFICOS E VALORES ==========
+    function updateCharts() {
+        if (prodChart) prodChart.destroy();
+        if (sustChart) sustChart.destroy();
+        
+        const prodCtx = document.getElementById('prodChart').getContext('2d');
+        const sustCtx = document.getElementById('sustChart').getContext('2d');
+        
+        prodChart = new Chart(prodCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Produtividade', 'Potencial'],
+                datasets: [{
+                    data: [productivity, 100 - productivity],
+                    backgroundColor: ['#4FC3F7', '#E0F2FE'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: { legend: { position: 'bottom', labels: { font: { size: 10 } } } }
+            }
+        });
+        
+        sustChart = new Chart(sustCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Sustentabilidade', 'Potencial'],
+                datasets: [{
+                    data: [sustainability, 100 - sustainability],
+                    backgroundColor: ['#2E86C1', '#E0F2FE'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: { legend: { position: 'bottom', labels: { font: { size: 10 } } } }
+            }
+        });
+        
+        prodValueSpan.innerText = Math.round(productivity);
+        sustValueSpan.innerText = Math.round(sustainability);
+    }
+    
+    // ========== FEEDBACK DA ESCOLHA ==========
+    function showChoiceFeedback(desc, effect) {
+        const prodChange = effect.prod;
+        const sustChange = effect.sust;
+        
+        let prodSymbol = prodChange >= 0 ? `+${prodChange}` : `${prodChange}`;
+        let sustSymbol = sustChange >= 0 ? `+${sustChange}` : `${sustChange}`;
+        
+        let feedbackHtml = `
+            <div style="animation: fadeIn 0.3s ease;">
+                <strong>📌 ${desc}</strong><br>
+                📊 Produtividade: ${prodSymbol}% &nbsp;|&nbsp; 🌿 Sustentabilidade: ${sustSymbol}%
+            </div>
+        `;
+        
+        feedbackDiv.innerHTML = feedbackHtml;
+        feedbackDiv.style.background = '#C8E6D9';
+        
+        // Efeito visual adicional
+        if (prodChange + sustChange > 0) {
+            feedbackDiv.style.borderLeft = '4px solid #4CAF50';
+        } else if (prodChange + sustChange < 0) {
+            feedbackDiv.style.borderLeft = '4px solid #FF9800';
+        }
+        
+        // Remove feedback após 1.5s (será sobrescrito)
+        setTimeout(() => {
+            if (feedbackDiv.innerHTML === feedbackHtml) {
+                feedbackDiv.innerHTML = '';
+                feedbackDiv.style.background = 'rgba(255, 255, 200, 0.6)';
+            }
+        }, 1500);
+    }
+    
+    // ========== FIM DE JOGO: AVALIAÇÃO FINAL ==========
+    function endGame() {
+        let mensagem = '';
+        let cor = '';
+        let recomendacao = '';
+        
+        // Avaliação baseada nos dois eixos
+        if (productivity >= 70 && sustainability >= 70) {
+            mensagem = '🏆 EXCELENTE! Sua fazenda é um modelo de equilíbrio perfeito!';
+            cor = '#4CAF50';
+            recomendacao = 'Você provou que é possível produzir muito e preservar ainda mais. Parabéns, gestor sustentável!';
+        } else if (productivity >= 70 && sustainability < 40) {
+            mensagem = '⚠️ ATENÇÃO! Alta produtividade, mas sustentabilidade crítica.';
+            cor = '#FF9800';
+            recomendacao = 'Invista em recuperação ambiental, senão sua produção futura estará ameaçada.';
+        } else if (sustainability >= 70 && productivity < 40) {
+            mensagem = '🌿 VOCÊ PRESERVA MUITO, mas a produtividade está baixa.';
+            cor = '#2196F3';
+            recomendacao = 'Tecnologias como IoT e bioinsumos podem aumentar sua eficiência sem perder a sustentabilidade.';
+        } else if (productivity < 35 && sustainability < 35) {
+            mensagem = '💀 CRISE NA FAZENDA! Ambos os pilares estão no vermelho.';
+            cor = '#F44336';
+            recomendacao = 'Reavalie todas as estratégias. Invista em energia solar, irrigação inteligente e manejo regenerativo.';
+        } else if (productivity >= 60 && sustainability >= 50) {
+            mensagem = '🌟 MUITO BOM! Você está no caminho certo para o agro sustentável.';
+            cor = '#8BC34A';
+            recomendacao = 'Continue equilibrando decisões. Pequenos ajustes podem te levar à excelência!';
+        } else if (productivity - sustainability > 20) {
+            mensagem = '⚖️ Desequilíbrio: produtividade alta, sustentabilidade média-baixa.';
+            cor = '#FFB74D';
+            recomendacao = 'Tente priorizar ações ambientais na próxima rodada. O futuro agradece.';
+        } else if (sustainability - productivity > 20) {
+            mensagem = '🌎 Ótima consciência ambiental! Agora foque em ganho de produção sustentável.';
+            cor = '#64B5F6';
+            recomendacao = 'Com tecnologias verdes, é possível aumentar a produtividade sem danos.';
+        } else {
+            mensagem = '📈 BOM INÍCIO! Continue aprendendo e equilibrando as decisões.';
+            cor = '#9E9E9E';
+            recomendacao = 'Cada escolha importa. Rejogue e descubra novos caminhos para o equilíbrio.';
+        }
+        
+        // Calcular pontuação final
+        const score = Math.round((productivity + sustainability) / 2);
+        
+        feedbackDiv.innerHTML = `
+            <div style="padding: 0.5rem;">
+                <div style="font-size: 1.3rem; font-weight: 800; color: ${cor};">${mensagem}</div>
+                <div style="margin-top: 0.8rem;"><strong>🎯 Pontuação final:</strong> ${score}/100</div>
+                <div style="margin-top: 0.5rem;"><strong>💡 Dica:</strong> ${recomendacao}</div>
+                <div style="margin-top: 0.8rem; font-size: 0.9rem;">✅ Você respondeu ${questionsAnswered} cenários com consciência!</div>
+                <button id="playAgainBtn" style="margin-top: 1rem; background: #2D8C6A; color: white; border: none; padding: 8px 24px; border-radius: 40px; cursor: pointer; font-weight: bold;">🔄 Jogar Novamente</button>
+            </div>
+        `;
+        
+        // Esconder os botões de escolha
+        gameButtons.innerHTML = '<div style="text-align:center; padding:1rem;">✨ Jornada concluída! Clique em "Jogar Novamente" ✨</div>';
+        
+        // Adicionar evento para reiniciar
+        const playAgainBtn = document.getElementById('playAgainBtn');
+        if (playAgainBtn) {
+            playAgainBtn.addEventListener('click', () => {
+                initGame();
+            });
+        }
+        
+        // Atualizar progresso
+        progressSpan.innerHTML = `🏁 Jogo finalizado! ${questionsAnswered} decisões tomadas.`;
+    }
+    
+    // ========== ATUALIZAR INFO DE PROGRESSO ==========
+    function updateProgressInfo() {
+        const remaining = remainingScenarios.length;
+        const answered = questionsAnswered;
+        const total = totalQuestions;
+        
+        if (remaining > 0) {
+            progressSpan.innerHTML = `📋 Progresso: ${answered}/${total} decisões | ${remaining} restantes`;
+        } else {
+            progressSpan.innerHTML = `🏁 Aguardando finalização...`;
+        }
+    }
+    
+    // ========== RESET MANUAL (BOTÃO) ==========
+    function manualReset() {
+        initGame();
+        feedbackDiv.innerHTML = '<span style="color:#2D8C6A;">🔄 Jogo reiniciado! Nova ordem de perguntas gerada.</span>';
+        setTimeout(() => {
+            if (feedbackDiv.innerHTML.includes('reiniciado')) {
+                feedbackDiv.innerHTML = '';
+            }
+        }, 2000);
+    }
+    
+    // ========== EVENT LISTENER RESET ==========
+    resetBtn.addEventListener('click', manualReset);
+    
+    // ========== INICIAR JOGO ==========
+    initGame();
+</script>
+</body>
+</html>
 
     <!-- 4. Tecnologia Verde + Inovações Sustentáveis + Mitos vs Verdades -->
     <section id="tecnologia" class="section">
