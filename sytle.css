@@ -1,0 +1,803 @@
+/* ============================================
+   AGRINHO 2026 - CSS COMPLETO
+   Tema: Tecnologia, Agricultura e Sustentabilidade
+   Inclui: Fazenda Interativa, Jornada Byte à Mesa, Jogo Eco-Agro
+   ============================================ */
+
+/* ========== RESET E VARIÁVEIS GLOBAIS ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Cores principais - Tema Agro Sustentável */
+    --verde-musgo: #1E3A1F;
+    --verde-agrinho: #4CAF50;
+    --verde-destaque: #7CB518;
+    --verde-claro: #A8E6CF;
+    --amarelo-colheita: #F5B042;
+    --amarelo-suave: #FFE0A3;
+    --terra-clara: #F5EEDC;
+    --marrom-solo: #8B6946;
+    --azul-tecnologia: #2E86C1;
+    --cinza-claro: #E8ECDF;
+    --branco-neve: #FFFFFF;
+    --preto-suave: #1F2A1F;
+    
+    /* Efeitos */
+    --sombra-leve: 0 8px 20px rgba(0, 0, 0, 0.08);
+    --sombra-media: 0 12px 28px rgba(0, 0, 0, 0.12);
+    --sombra-forte: 0 20px 35px rgba(0, 0, 0, 0.2);
+    --sombra-gloss: 0 8px 32px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.3);
+    --border-radius-p: 8px;
+    --border-radius-m: 16px;
+    --border-radius-l: 24px;
+    --border-radius-xl: 32px;
+    --border-radius-xxl: 48px;
+    --transition-padrao: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========== ESTILOS BASE ========== */
+body {
+    font-family: 'Inter', 'Poppins', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(145deg, #F5F7E9 0%, #EDF2E3 100%);
+    color: var(--preto-suave);
+    line-height: 1.5;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    transition: background 0.3s ease, color 0.2s ease;
+}
+
+/* Modo Escuro (Dark Mode) */
+body.dark-mode {
+    background: linear-gradient(145deg, #1A2A1A 0%, #0E1F0E 100%);
+    color: #E8F0DF;
+}
+
+body.dark-mode .card,
+body.dark-mode .info-card,
+body.dark-mode .timeline-card,
+body.dark-mode .highlight-card,
+body.dark-mode .form-container,
+body.dark-mode .game-panel,
+body.dark-mode .farm-map,
+body.dark-mode .qr-code,
+body.dark-mode .myth-panel {
+    background: #2E3A2B;
+    color: #E2EED9;
+    border-color: #5B8C4E;
+}
+
+body.dark-mode .header {
+    background: #0E2A12;
+}
+
+body.dark-mode .btn,
+body.dark-mode .game-btn {
+    background: #4C8C3A;
+}
+
+body.dark-mode .btn:hover {
+    background: #6AAB55;
+}
+
+body.dark-mode .section-title {
+    color: #C3E6A5;
+}
+
+body.dark-mode .nav-links a:hover,
+body.dark-mode .nav-links a.active {
+    background: var(--amarelo-colheita);
+    color: var(--verde-musgo);
+}
+
+/* ========== TIPOGRAFIA ========== */
+h1, h2, h3, h4, .logo {
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+h1 {
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, var(--verde-musgo), var(--verde-agrinho));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+body.dark-mode h1 {
+    background: linear-gradient(135deg, #C3E6A5, var(--amarelo-colheita));
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    color: var(--verde-musgo);
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--verde-agrinho), var(--amarelo-colheita));
+    margin: 0.8rem auto 0;
+    border-radius: 4px;
+}
+
+/* ========== HEADER E NAVEGAÇÃO ========== */
+.header {
+    background: rgba(30, 58, 30, 0.96);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    box-shadow: var(--sombra-media);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.logo i {
+    font-size: 1.8rem;
+    color: var(--amarelo-colheita);
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-padrao);
+    padding: 8px 16px;
+    border-radius: 40px;
+    font-size: 0.95rem;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    background: var(--amarelo-colheita);
+    color: var(--verde-musgo);
+    transform: translateY(-2px);
+}
+
+/* ========== BOTÕES ========== */
+.btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--verde-agrinho), var(--verde-destaque));
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 40px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition-padrao);
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, var(--verde-destaque), var(--verde-agrinho));
+}
+
+.game-btn {
+    background: var(--verde-musgo);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 40px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition-padrao);
+}
+
+.game-btn:hover {
+    transform: scale(1.02);
+    background: var(--verde-agrinho);
+}
+
+.theme-toggle {
+    background: var(--amarelo-suave);
+    border: none;
+    padding: 8px 18px;
+    border-radius: 40px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition-padrao);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.02);
+    background: var(--amarelo-colheita);
+}
+
+/* ========== SEÇÕES ========== */
+.section {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: rgba(250, 250, 235, 0.7);
+    border-radius: var(--border-radius-xxl);
+    backdrop-filter: blur(2px);
+    transition: var(--transition-padrao);
+}
+
+body.dark-mode .section {
+    background: rgba(30, 40, 28, 0.7);
+}
+
+/* ========== MAPA INTERATIVO (FAZENDA) ========== */
+.farm-map {
+    background: linear-gradient(135deg, #AACC77, #8FC154);
+    border-radius: var(--border-radius-xxl);
+    padding: 1.5rem;
+    box-shadow: var(--sombra-forte);
+    border: 2px solid var(--amarelo-suave);
+}
+
+.map-svg-container svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--border-radius-xl);
+    cursor: pointer;
+}
+
+.map-area {
+    cursor: pointer;
+    transition: filter 0.2s, stroke 0.2s;
+}
+
+.map-area:hover {
+    filter: brightness(1.05);
+    stroke: var(--amarelo-colheita);
+    stroke-width: 3;
+}
+
+/* Caixa de Informação Flutuante */
+.info-card {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--branco-neve);
+    border-radius: var(--border-radius-xl);
+    padding: 1.5rem;
+    max-width: 450px;
+    width: 90%;
+    z-index: 1000;
+    box-shadow: var(--sombra-forte);
+    border-left: 8px solid var(--amarelo-colheita);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.info-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+    color: var(--verde-musgo);
+}
+
+.close-info {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #999;
+    transition: var(--transition-padrao);
+}
+
+.close-info:hover {
+    color: #c0392b;
+    transform: scale(1.1);
+}
+
+.tech-tag {
+    display: inline-block;
+    background: var(--cinza-claro);
+    padding: 0.3rem 1rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 0.8rem;
+}
+
+/* ========== JORNADA TIMELINE (BYTE À MESA) ========== */
+.timeline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.timeline-card {
+    background: var(--branco-neve);
+    border-radius: var(--border-radius-xl);
+    padding: 1.5rem;
+    flex: 1;
+    min-width: 230px;
+    text-align: center;
+    box-shadow: var(--sombra-leve);
+    transition: var(--transition-padrao);
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.timeline-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--sombra-media);
+    border-color: var(--amarelo-colheita);
+}
+
+.timeline-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+}
+
+.timeline-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--verde-musgo);
+}
+
+.timeline-card p {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+}
+
+/* QR Code Simulation */
+.qr-code {
+    background: var(--cinza-claro);
+    border-radius: var(--border-radius-xl);
+    padding: 1.5rem;
+    text-align: center;
+    margin-top: 1.5rem;
+    transition: var(--transition-padrao);
+}
+
+.qr-code i {
+    font-size: 3rem;
+    color: var(--verde-agrinho);
+    margin-bottom: 0.5rem;
+}
+
+/* ========== JOGO ECO-AGRO (GAMIFICAÇÃO) ========== */
+.game-panel {
+    background: var(--branco-neve);
+    border-radius: var(--border-radius-xl);
+    padding: 1.8rem;
+    margin-top: 1rem;
+    box-shadow: var(--sombra-media);
+}
+
+.game-question {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 1rem 0;
+    text-align: center;
+    color: var(--verde-musgo);
+}
+
+.game-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.game-metrics {
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.metric {
+    text-align: center;
+    flex: 1;
+    min-width: 180px;
+}
+
+.metric canvas {
+    max-width: 180px;
+    margin: 0.5rem auto;
+}
+
+/* Gráficos */
+.chart-container {
+    max-width: 500px;
+    margin: 1rem auto;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: var(--border-radius-l);
+    padding: 1rem;
+}
+
+/* ========== CARTÕES E CARDS ========== */
+.card {
+    background: var(--branco-neve);
+    padding: 1.8rem;
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--sombra-leve);
+    transition: var(--transition-padrao);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-media);
+}
+
+.card i {
+    font-size: 2.5rem;
+    color: var(--verde-agrinho);
+    margin-bottom: 1rem;
+}
+
+.card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    color: var(--verde-musgo);
+}
+
+/* ========== HIGHLIGHTS E ESTATÍSTICAS ========== */
+.highlights {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.highlight-card {
+    background: rgba(255, 255, 240, 0.9);
+    backdrop-filter: blur(4px);
+    border-radius: var(--border-radius-xl);
+    padding: 1.2rem 1.8rem;
+    text-align: center;
+    flex: 1;
+    min-width: 160px;
+    border: 1px solid var(--amarelo-suave);
+    transition: var(--transition-padrao);
+}
+
+.highlight-card:hover {
+    transform: translateY(-3px);
+    background: white;
+}
+
+.highlight-card i {
+    font-size: 2rem;
+    color: var(--amarelo-colheita);
+}
+
+.highlight-card h3 {
+    font-size: 1.8rem;
+    margin: 0.5rem 0;
+}
+
+/* ========== BARRA DE ACESSIBILIDADE ========== */
+.accessibility-bar {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: flex-end;
+    max-width: 1400px;
+    margin: 0.5rem auto;
+    padding: 0 1rem;
+}
+
+.access-btn {
+    background: var(--verde-musgo);
+    border: none;
+    padding: 6px 14px;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: var(--transition-padrao);
+}
+
+.access-btn:hover {
+    background: var(--verde-agrinho);
+    transform: scale(1.02);
+}
+
+/* Alto Contraste */
+body.high-contrast {
+    background: #000000;
+    color: #FFFF00;
+}
+
+body.high-contrast .card,
+body.high-contrast .farm-map,
+body.high-contrast .timeline-card,
+body.high-contrast .game-panel,
+body.high-contrast .section {
+    background: #111111;
+    border: 2px solid #FFFF00;
+    color: #FFFFFF;
+}
+
+body.high-contrast .btn,
+body.high-contrast .game-btn {
+    background: #FFFF00;
+    color: #000000;
+}
+
+/* ========== MITOS VS VERDADES ========== */
+.myth-panel {
+    background: var(--cinza-claro);
+    border-radius: var(--border-radius-xl);
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.myth-panel p {
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    border-left: 4px solid var(--amarelo-colheita);
+}
+
+/* ========== FOOTER ========== */
+.footer {
+    background: linear-gradient(135deg, var(--verde-musgo), #1A3F1E);
+    color: #E9F5DB;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+    font-size: 0.9rem;
+}
+
+.footer i {
+    margin: 0 0.3rem;
+    color: var(--amarelo-colheita);
+}
+
+.footer a {
+    color: var(--amarelo-colheita);
+    text-decoration: none;
+}
+
+/* ========== RESPONSIVIDADE ========== */
+@media (max-width: 1024px) {
+    .section {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+    }
+    
+    .nav-links {
+        justify-content: center;
+        gap: 0.8rem;
+    }
+    
+    .nav-links a {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .section {
+        padding: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .timeline-card {
+        min-width: 100%;
+    }
+    
+    .game-metrics {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .game-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .game-btn {
+        width: 100%;
+        max-width: 250px;
+    }
+    
+    .info-card {
+        width: 95%;
+        padding: 1rem;
+        bottom: 10px;
+    }
+    
+    .info-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .card {
+        padding: 1.2rem;
+    }
+    
+    .highlights {
+        flex-direction: column;
+    }
+    
+    .highlight-card {
+        min-width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.2rem;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+    }
+    
+    .game-question {
+        font-size: 1rem;
+    }
+    
+    .timeline-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .btn, .game-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* ========== ANIMAÇÕES ========== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* ========== SCROLLBAR PERSONALIZADA ========== */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--cinza-claro);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--verde-agrinho);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--verde-musgo);
+}
+
+/* ========== SELEÇÃO DE TEXTO ========== */
+::selection {
+    background: var(--amarelo-colheita);
+    color: var(--verde-musgo);
+}
+
+/* ========== FOCO PARA ACESSIBILIDADE ========== */
+:focus {
+    outline: 2px solid var(--amarelo-colheita);
+    outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--amarelo-colheita);
+    outline-offset: 2px;
+}
+
+/* ========== UTILITÁRIOS ========== */
+.text-center {
+    text-align: center;
+}
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+
+.hidden {
+    display: none;
+}
+
+/* ========== SMOOTH SCROLL ========== */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ========== LOADING SPINNER (CASO NECESSÁRIO) ========== */
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--cinza-claro);
+    border-top: 4px solid var(--verde-agrinho);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
