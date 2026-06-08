@@ -1,7 +1,7 @@
 /* ============================================
    AGRINHO 2026 - ESTILOS FRUTIGER AERO
-   Tema: Vidro, brilhos, gradientes aquáticos, bolhas
-   Layout responsivo, sem frameworks
+   Tema: Vidro, brilhos, gradientes aquáticos
+   Layout responsivo
    ============================================ */
 
 * {
@@ -18,8 +18,6 @@
     --gloss-branco: rgba(255, 255, 255, 0.55);
     --brilho-dourado: #FFD966;
     --vidro-claro: rgba(255, 255, 255, 0.35);
-    --vidro-escuro: rgba(0, 40, 50, 0.65);
-    --gradiente-aqua: linear-gradient(135deg, #C2E9FB 0%, #9CD4E8 50%, #7EC8E0 100%);
     --sombra-gloss: 0 8px 32px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.4);
     --bolha-sombra: 0 20px 35px -10px rgba(0, 0, 0, 0.15), inset 0 1px 4px rgba(255, 255, 255, 0.8);
     --border-radius-xl: 28px;
@@ -35,7 +33,6 @@ body {
     min-height: 100vh;
 }
 
-/* Efeito de bolhas de fundo */
 body::before {
     content: '';
     position: fixed;
@@ -57,7 +54,6 @@ body::before {
     z-index: 1;
 }
 
-/* ========== CABEÇALHO ========== */
 .cabecalho {
     background: rgba(38, 102, 96, 0.75);
     backdrop-filter: blur(16px);
@@ -88,7 +84,6 @@ body::before {
     font-size: 2rem;
     font-weight: 800;
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    letter-spacing: -0.5px;
 }
 
 .subtitulo {
@@ -96,8 +91,7 @@ body::before {
     opacity: 0.9;
 }
 
-/* ========== INTRODUÇÃO / HERO ========== */
-.secao-introducao {
+.secao-introducao, .secao-tecnologias, .secao-simulador {
     padding: 48px 0;
 }
 
@@ -135,7 +129,6 @@ body::before {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* Pilares */
 .pilares-container {
     display: flex;
     flex-wrap: wrap;
@@ -176,11 +169,6 @@ body::before {
 .pilar p {
     font-size: 0.85rem;
     opacity: 0.85;
-}
-
-/* ========== CARDS DE TECNOLOGIA ========== */
-.secao-tecnologias {
-    padding: 48px 0;
 }
 
 .cards-container {
@@ -226,9 +214,7 @@ body::before {
     opacity: 0.9;
 }
 
-/* ========== SIMULADOR ========== */
 .secao-simulador {
-    padding: 48px 0;
     background: rgba(255, 255, 250, 0.4);
     border-radius: var(--border-radius-xxl);
     margin: 0 24px 48px 24px;
@@ -241,7 +227,6 @@ body::before {
     font-weight: 500;
 }
 
-/* Botões de ação */
 .botoes-acoes {
     display: flex;
     flex-wrap: wrap;
@@ -269,11 +254,6 @@ body::before {
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
 }
 
-.botao-acao:active {
-    transform: translateY(1px);
-}
-
-/* Barras de progresso estilo Frutiger Aero */
 .barras-container {
     max-width: 650px;
     margin: 0 auto 32px;
@@ -290,10 +270,6 @@ body::before {
     font-weight: 600;
     margin-bottom: 10px;
     font-size: 1rem;
-}
-
-.icone-barra {
-    font-size: 1.2rem;
 }
 
 .progresso-barra {
@@ -314,7 +290,6 @@ body::before {
     overflow: hidden;
 }
 
-/* Efeito de brilho na barra */
 .progresso-preenchimento::after {
     content: '';
     position: absolute;
@@ -335,7 +310,6 @@ body::before {
     color: #1A6B5E;
 }
 
-/* Feedback */
 .feedback-mensagem {
     text-align: center;
     background: rgba(255, 255, 245, 0.7);
@@ -349,7 +323,6 @@ body::before {
     transition: var(--transicao);
 }
 
-/* Botão reiniciar */
 .botao-reiniciar {
     display: flex;
     align-items: center;
@@ -374,11 +347,6 @@ body::before {
     background: linear-gradient(120deg, #FFC065, #FFA233);
 }
 
-.botao-icone {
-    font-size: 1.1rem;
-}
-
-/* Rodapé */
 .rodape {
     background: rgba(20, 70, 60, 0.85);
     backdrop-filter: blur(8px);
@@ -394,11 +362,6 @@ body::before {
     font-size: 0.9rem;
 }
 
-.rodape-icone {
-    margin-right: 6px;
-}
-
-/* Responsividade */
 @media (max-width: 768px) {
     .container {
         padding: 0 16px;
