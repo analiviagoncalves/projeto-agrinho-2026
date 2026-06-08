@@ -1,185 +1,97 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Agrinho 2026 - Fazenda do Futuro: Tecnologia, Agricultura e Sustentabilidade">
-    <title>Agrinho 2026 | Tecnologia + Agricultura + Sustentabilidade</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Agrinho 2026 - Simulador de Gestão Sustentável no Campo">
+    <title>Agrinho 2026 | Gestão Sustentável no Campo</title>
+    <!-- Arquivos externos CSS e JS -->
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
 
-<header class="header">
-    <div class="logo">
-        <span class="logo-icon">🌱</span>
-        <span class="logo-text">Agrinho 2026</span>
-    </div>
-    <nav class="nav-links">
-        <a href="#home" class="active">🌍 Início</a>
-        <a href="#jornada">📖 Byte à Mesa</a>
-        <a href="#jogo">🎮 Eco-Agro</a>
-        <a href="#emissoes">📊 Emissões</a>
-    </nav>
-    <button id="themeToggle" class="theme-toggle" aria-label="Modo escuro">🌙</button>
-</header>
-
-<main>
-    <!-- INTRODUÇÃO PRINCIPAL -->
-    <section id="home" class="section hero-section">
-        <h1>🌱 Tecnologia + Agricultura + Sustentabilidade</h1>
-        <p>Por muito tempo, o campo e a tecnologia foram vistos como universos distantes. Hoje, eles caminham lado a lado. Da inteligência artificial que otimiza o uso da água aos drones que monitoram a saúde das lavouras, a inovação digital se tornou a maior aliada da preservação ambiental.</p>
-        <p class="highlight-text"><strong>🎯 Nossa meta é clara: Produzir mais, alimentar o mundo e, acima de tudo, proteger a Terra para as próximas gerações.</strong></p>
-        
-        <div class="pillars">
-            <div class="pillar">
-                <span class="pillar-icon">🖥️</span>
-                <h3>Tecnologia no Campo</h3>
-                <p>Robótica, análise de dados e conectividade transformando a rotina do produtor rural.</p>
-            </div>
-            <div class="pillar">
-                <span class="pillar-icon">🌿</span>
-                <h3>Práticas Sustentáveis</h3>
-                <p>Projetos que aliam desenvolvimento econômico à conservação de florestas e rios.</p>
-            </div>
-            <div class="pillar">
-                <span class="pillar-icon">🤝</span>
-                <h3>Cidadania e Educação</h3>
-                <p>O papel de cada um — no campo ou na cidade — na construção de um ecossistema equilibrado.</p>
-            </div>
+    <!-- Cabeçalho principal -->
+    <header class="cabecalho">
+        <div class="container">
+            <h1 class="titulo-principal">
+                <span class="icone-agro">🌾</span> 
+                Agrinho 2026
+                <span class="icone-sustentavel">🌱</span>
+            </h1>
+            <p class="subtitulo">Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente</p>
         </div>
-        <p class="inspiration-text">🌎 Navegue com a gente e descubra como as ferramentas do presente estão sendo usadas para cultivar o amanhã. Afinal, a sustentabilidade não é apenas uma escolha, é o único caminho para um futuro melhor!</p>
-    </section>
+    </header>
 
-    <!-- MAPA INTERATIVO (FAZENDA DO FUTURO) -->
-    <section class="section">
-        <h2 class="section-title">🌍 Fazenda do Futuro — Mapa Interativo</h2>
-        <div class="farm-map">
-            <div class="map-container" id="interactiveMap">
-                <div class="map-zone" data-area="galpao">
-                    <span class="map-icon">🏠</span>
-                    <span class="map-title">GALPÃO</span>
-                    <span class="map-desc">☀️ Energia Solar + Biomassa</span>
-                </div>
-                <div class="map-zone" data-area="lavoura">
-                    <span class="map-icon">🌾</span>
-                    <span class="map-title">LAVOURA</span>
-                    <span class="map-desc">🛸 Drones + IA + Satélites</span>
-                </div>
-                <div class="map-zone" data-area="solo">
-                    <span class="map-icon">🌱</span>
-                    <span class="map-title">SOLO</span>
-                    <span class="map-desc">💧 Sensores IoT + Irrigação</span>
+    <!-- Seção de introdução -->
+    <main>
+        <section class="secao-introducao">
+            <div class="container">
+                <h2 class="titulo-secao">Tecnologia e Sustentabilidade no Campo</h2>
+                <div class="texto-intro">
+                    <p>Por muito tempo, o campo e a tecnologia foram vistos como universos distantes. Hoje, eles caminham lado a lado. Da inteligência artificial que otimiza o uso da água aos drones que monitoram a saúde das lavouras, a inovação digital se tornou a maior aliada da preservação ambiental.</p>
+                    <p>Nossa meta é clara: <strong>produzir mais, alimentar o mundo e proteger a Terra</strong> para as próximas gerações.</p>
                 </div>
             </div>
-            <p class="map-hint">👆 Clique em qualquer área para mais informações</p>
-        </div>
-    </section>
+        </section>
 
-    <!-- JORNADA DO BYTE À MESA -->
-    <section id="jornada" class="section">
-        <h2 class="section-title">📱 Do Byte à Mesa: A Jornada do Alimento</h2>
-        <div class="timeline" id="timeline">
-            <div class="timeline-card" data-fase="1">
-                <span class="timeline-icon">🚜</span>
-                <h3>Plantio de Precisão</h3>
-                <p>Tratores com GPS evitam desperdício de sementes e compactação do solo.</p>
-                <span class="timeline-tag">Clique para detalhes</span>
+        <!-- Cards de tecnologias verdes -->
+        <section class="secao-tecnologias">
+            <div class="container">
+                <h2 class="titulo-secao">🌿 Tecnologias que Transformam o Agro</h2>
+                <div class="cards-container" id="cardsContainer">
+                    <!-- Os cards serão gerados dinamicamente via JavaScript (evita repetição inline) -->
+                </div>
             </div>
-            <div class="timeline-card" data-fase="2">
-                <span class="timeline-icon">🧪</span>
-                <h3>Bioinsumos</h3>
-                <p>Defensivos naturais reduzem químicos pesados em até 65%.</p>
-                <span class="timeline-tag">Clique para detalhes</span>
-            </div>
-            <div class="timeline-card" data-fase="3">
-                <span class="timeline-icon">📦</span>
-                <h3>Blockchain + QR</h3>
-                <p>Rastreabilidade total da fazenda até a mesa.</p>
-                <span class="timeline-tag">Clique para detalhes</span>
-            </div>
-        </div>
-        <div class="qr-simulator">
-            <p><strong>🔍 Simulação de Rastreabilidade:</strong></p>
-            <p id="qrData" class="qr-data">Fazenda Água Viva - Carbono Neutro</p>
-            <button id="simulateQR" class="btn-primary">📱 Simular Leitura QR</button>
-        </div>
-    </section>
+        </section>
 
-    <!-- JOGO ECO-AGRO -->
-    <section id="jogo" class="section">
-        <h2 class="section-title">⚖️ Eco-Agro: Jogo do Equilíbrio</h2>
-        <div class="game-panel">
-            <div id="gameText" class="game-question">Você é gestor da fazenda. O que fazer?</div>
-            <div id="gameButtons" class="game-buttons"></div>
-            <div class="game-metrics">
-                <div class="metric">
-                    <h3>📊 Produtividade</h3>
-                    <div class="progress-bar">
-                        <div id="prodFill" class="progress-fill" style="width:50%"></div>
+        <!-- Simulador de Gestão Sustentável (Jogo de decisões) -->
+        <section class="secao-simulador">
+            <div class="container">
+                <h2 class="titulo-secao">⚖️ Simulador de Gestão Sustentável</h2>
+                <p class="descricao-simulador">Escolha ações para equilibrar a produtividade e a sustentabilidade da sua fazenda:</p>
+                
+                <!-- Botões de ações -->
+                <div class="botoes-acoes" id="botoesAcoes">
+                    <!-- Botões gerados dinamicamente via JS -->
+                </div>
+
+                <!-- Barras de progresso (CSS Puro) -->
+                <div class="barras-container">
+                    <div class="barra-item">
+                        <label for="barraProdutividade" class="rotulo-barra">📊 Produtividade</label>
+                        <div class="progresso-barra">
+                            <div class="progresso-preenchimento" id="barraProdutividade" style="width: 50%"></div>
+                        </div>
+                        <span class="valor-barra" id="valorProdutividade">50%</span>
                     </div>
-                    <span id="prodValue" class="metric-value">50</span><span>%</span>
-                </div>
-                <div class="metric">
-                    <h3>🌳 Sustentabilidade</h3>
-                    <div class="progress-bar">
-                        <div id="sustFill" class="progress-fill" style="width:50%"></div>
+                    <div class="barra-item">
+                        <label for="barraSustentabilidade" class="rotulo-barra">🌳 Sustentabilidade</label>
+                        <div class="progresso-barra">
+                            <div class="progresso-preenchimento" id="barraSustentabilidade" style="width: 50%"></div>
+                        </div>
+                        <span class="valor-barra" id="valorSustentabilidade">50%</span>
                     </div>
-                    <span id="sustValue" class="metric-value">50</span><span>%</span>
                 </div>
-            </div>
-            <button id="resetGame" class="btn-secondary">♻️ Reiniciar Jornada</button>
-            <div id="feedbackMsg" class="feedback-msg"></div>
-        </div>
-    </section>
 
-    <!-- GRÁFICOS DE EMISSÕES (Canvas puro, sem Chart.js) -->
-    <section id="emissoes" class="section">
-        <h2 class="section-title">📊 Redução de Emissões com Tecnologias Verdes</h2>
-        <div class="stats-container">
-            <div class="stat-card">
-                <h3>🌎 Emissões Globais por Setor</h3>
-                <canvas id="setorCanvas" width="300" height="200"></canvas>
-                <p class="stat-note">📌 CO₂ responde por <strong>72%</strong> das emissões</p>
-            </div>
-            <div class="stat-card">
-                <h3>📈 Mercado de Tecnologias Verdes</h3>
-                <canvas id="mercadoCanvas" width="300" height="200"></canvas>
-                <p class="stat-note">💰 US$ 31B (2026) → US$ 140B (2034)</p>
-            </div>
-            <div class="stat-card">
-                <h3>🇧🇷 Brasil: Emissões Históricas</h3>
-                <canvas id="brasilCanvas" width="300" height="200"></canvas>
-                <p class="stat-note">📉 Queda de <strong>16,7%</strong> com redução do desmatamento</p>
-            </div>
-            <div class="stat-card">
-                <h3>📉 Redução por Tecnologia</h3>
-                <canvas id="tecnologiaCanvas" width="300" height="200"></canvas>
-                <div class="badge-container">
-                    <span class="stat-badge">Solar: -75%</span>
-                    <span class="stat-badge">Drones: -65%</span>
-                    <span class="stat-badge">IoT: -70%</span>
-                    <span class="stat-badge">Biogás: -80%</span>
+                <!-- Mensagem de feedback -->
+                <div class="feedback-mensagem" id="feedbackMensagem">
+                    Clique em uma ação para ver o impacto!
                 </div>
+
+                <!-- Botão de reiniciar -->
+                <button class="botao-reiniciar" id="botaoReiniciar">🔄 Reiniciar Simulação</button>
             </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="rodape">
+        <div class="container">
+            <p>Agrinho 2026 — Tecnologia, Agricultura e Sustentabilidade</p>
+            <p>Desenvolvido para o Concurso de Programação | SEED-PR / SENAR-PR</p>
         </div>
-        <p class="source-note">🔬 Dados: WRI / SEEG / Projeções Agrinho 2026</p>
-    </section>
-</main>
+    </footer>
 
-<footer class="footer">
-    <p>🌱 Agrinho 2026 — Tecnologia, Agricultura e Sustentabilidade unidas contra as mudanças climáticas.</p>
-    <small>© 2026 | Cultivando o amanhã com inovação e consciência ambiental</small>
-</footer>
-
-<!-- CAIXA DE INFORMAÇÃO FLUTUANTE -->
-<div id="infoBox" class="info-card" style="display:none;">
-    <div id="closeInfoBtn" class="close-info">&times;</div>
-    <h3 id="infoTitle"></h3>
-    <p id="infoDesc"></p>
-    <div id="infoTag" class="info-tag"></div>
-    <button id="hideInfoBtn" class="btn-small">Fechar</button>
-</div>
-
-<script src="script.js" defer></script>
 </body>
 </html>
