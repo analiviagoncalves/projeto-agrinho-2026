@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta name="description" content="Agrinho 2026 - Simulador de Gestão Sustentável no Campo">
+    <meta name="description" content="Agrinho 2026 - Simulador de Gestão Sustentável | Estética Frutiger Aero">
     <title>Agrinho 2026 | Gestão Sustentável no Campo</title>
     <!-- Arquivos externos CSS e JS -->
     <link rel="stylesheet" href="style.css">
@@ -14,23 +14,30 @@
     <!-- Cabeçalho principal -->
     <header class="cabecalho">
         <div class="container">
-            <h1 class="titulo-principal">
-                <span class="icone-agro">🌾</span> 
-                Agrinho 2026
-                <span class="icone-sustentavel">🌱</span>
-            </h1>
+            <div class="logo">
+                <i class="icone-logo">💧</i>
+                <h1 class="titulo-principal">Agrinho 2026</h1>
+                <i class="icone-logo">🌱</i>
+            </div>
             <p class="subtitulo">Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente</p>
         </div>
     </header>
 
-    <!-- Seção de introdução -->
+    <!-- Conteúdo principal -->
     <main>
+        <!-- Seção de introdução -->
         <section class="secao-introducao">
             <div class="container">
-                <h2 class="titulo-secao">Tecnologia e Sustentabilidade no Campo</h2>
-                <div class="texto-intro">
+                <div class="hero-intro">
+                    <h2 class="titulo-secao">🌊 Tecnologia + Agricultura + Sustentabilidade</h2>
                     <p>Por muito tempo, o campo e a tecnologia foram vistos como universos distantes. Hoje, eles caminham lado a lado. Da inteligência artificial que otimiza o uso da água aos drones que monitoram a saúde das lavouras, a inovação digital se tornou a maior aliada da preservação ambiental.</p>
-                    <p>Nossa meta é clara: <strong>produzir mais, alimentar o mundo e proteger a Terra</strong> para as próximas gerações.</p>
+                    <p><strong>🎯 Nossa meta é clara: Produzir mais, alimentar o mundo e, acima de tudo, proteger a Terra para as próximas gerações.</strong></p>
+                    
+                    <div class="pilares-container" id="pilaresContainer">
+                        <!-- Pilares gerados dinamicamente via JS -->
+                    </div>
+                    
+                    <p class="citacao-final">🌎 Navegue com a gente e descubra como as ferramentas do presente estão sendo usadas para cultivar o amanhã. Afinal, a sustentabilidade não é apenas uma escolha, é o único caminho para um futuro melhor!</p>
                 </div>
             </div>
         </section>
@@ -38,35 +45,41 @@
         <!-- Cards de tecnologias verdes -->
         <section class="secao-tecnologias">
             <div class="container">
-                <h2 class="titulo-secao">🌿 Tecnologias que Transformam o Agro</h2>
+                <h2 class="titulo-secao">💎 Tecnologias que Transformam o Agro</h2>
                 <div class="cards-container" id="cardsContainer">
-                    <!-- Os cards serão gerados dinamicamente via JavaScript (evita repetição inline) -->
+                    <!-- Cards gerados dinamicamente via JavaScript -->
                 </div>
             </div>
         </section>
 
-        <!-- Simulador de Gestão Sustentável (Jogo de decisões) -->
+        <!-- Simulador de Gestão Sustentável -->
         <section class="secao-simulador">
             <div class="container">
-                <h2 class="titulo-secao">⚖️ Simulador de Gestão Sustentável</h2>
-                <p class="descricao-simulador">Escolha ações para equilibrar a produtividade e a sustentabilidade da sua fazenda:</p>
+                <h2 class="titulo-secao">⚖️ Eco-Agro: Jogo do Equilíbrio</h2>
+                <p class="descricao-simulador">💡 Escolha ações sustentáveis e veja o impacto nos indicadores da sua fazenda:</p>
                 
                 <!-- Botões de ações -->
                 <div class="botoes-acoes" id="botoesAcoes">
                     <!-- Botões gerados dinamicamente via JS -->
                 </div>
 
-                <!-- Barras de progresso (CSS Puro) -->
+                <!-- Barras de progresso estilo Frutiger Aero -->
                 <div class="barras-container">
                     <div class="barra-item">
-                        <label for="barraProdutividade" class="rotulo-barra">📊 Produtividade</label>
+                        <div class="rotulo-barra">
+                            <span class="icone-barra">📊</span>
+                            <span>Produtividade</span>
+                        </div>
                         <div class="progresso-barra">
                             <div class="progresso-preenchimento" id="barraProdutividade" style="width: 50%"></div>
                         </div>
                         <span class="valor-barra" id="valorProdutividade">50%</span>
                     </div>
                     <div class="barra-item">
-                        <label for="barraSustentabilidade" class="rotulo-barra">🌳 Sustentabilidade</label>
+                        <div class="rotulo-barra">
+                            <span class="icone-barra">🌳</span>
+                            <span>Sustentabilidade</span>
+                        </div>
                         <div class="progresso-barra">
                             <div class="progresso-preenchimento" id="barraSustentabilidade" style="width: 50%"></div>
                         </div>
@@ -76,11 +89,13 @@
 
                 <!-- Mensagem de feedback -->
                 <div class="feedback-mensagem" id="feedbackMensagem">
-                    Clique em uma ação para ver o impacto!
+                    ✨ Clique em uma ação para começar sua jornada sustentável!
                 </div>
 
                 <!-- Botão de reiniciar -->
-                <button class="botao-reiniciar" id="botaoReiniciar">🔄 Reiniciar Simulação</button>
+                <button class="botao-reiniciar" id="botaoReiniciar">
+                    <i class="botao-icone">🔄</i> Reiniciar Simulação
+                </button>
             </div>
         </section>
     </main>
@@ -88,8 +103,9 @@
     <!-- Rodapé -->
     <footer class="rodape">
         <div class="container">
-            <p>Agrinho 2026 — Tecnologia, Agricultura e Sustentabilidade</p>
+            <p><i class="rodape-icone">💧</i> Agrinho 2026 — Tecnologia, Agricultura e Sustentabilidade unidas contra as mudanças climáticas.</p>
             <p>Desenvolvido para o Concurso de Programação | SEED-PR / SENAR-PR</p>
+            <small>© 2026 | Cultivando o amanhã com inovação e consciência ambiental.</small>
         </div>
     </footer>
 
